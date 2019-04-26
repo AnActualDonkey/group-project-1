@@ -1,0 +1,29 @@
+.title {
+	font-family: Piedra;
+	font-size: 5em;
+	text-align: center;
+    text-shadow: 2px 2px #FF0000;
+}
+
+
+.subtitle {
+	font-family: Piedra;
+	font-size: 2em;
+	font-style: italic;
+	text-align: center;
+
+}
+
+.gamearea {
+	height: 100px;
+}
+
+.row {
+	margin-bottom: 20px;
+}
+
+h3 {
+	font-family: Piedra;
+	text-shadow: 2px 2px #FF0000;
+
+}
