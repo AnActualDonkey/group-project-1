@@ -28,7 +28,6 @@ function resetGame(){
 
 function setName() {
     if (gameState === "start") {
-{
 
         //set user name
         //push connection/user info to server
