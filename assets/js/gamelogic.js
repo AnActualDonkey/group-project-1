@@ -1,7 +1,5 @@
-var superHeroCode = "384939068772291";
+var fbKey = "AIzaSyChz5y9l2HLc7BpjOxXQAt3R1mjSH0tA3A";
 var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
-var marvelPrivateCode = "9db81123b9e0468057cbf6012e17f9d53bf811d0";
-var flickrCode = "bd21b96440233c2b507b7ec450da5ec1";
 
 //these variables are for the game logic
 var gameHealth;
@@ -12,6 +10,19 @@ var gameHeroName;
 var gameHeroes = [];
 var gameState;
 var gameClicks;
+
+
+//Initialize Firebase
+// Initialize Firebase
+var config = {
+    apiKey: fbKey,
+    authDomain: "hero-project-b444a.firebaseapp.com",
+    databaseURL: "https://hero-project-b444a.firebaseio.com",
+    projectId: "hero-project-b444a",
+    storageBucket: "hero-project-b444a.appspot.com",
+    messagingSenderId: "484835274167"
+};
+firebase.initializeApp(config);
 
 //game ref
 //update hostId here upon game value changes
@@ -87,6 +98,20 @@ function send() {
 
 }
 
+function flickr(){
+    var queryUrl = "https://api.flickr.com/services/rest/?method=flickr.test.echo&api_key=" + flickrCode;
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        console.log("Flickr response:" + response);
+        console.log(response);
+    });
+}
+
 //test
 //Calls API function (check console)
 send();
+flickr();
