@@ -1,5 +1,7 @@
 var superHeroCode = "384939068772291";
-
+var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
+var marvelPrivateCode = "9db81123b9e0468057cbf6012e17f9d53bf811d0";
+var flickrCode = "bd21b96440233c2b507b7ec450da5ec1";
 
 var gameHealth;
 var gameUser;
@@ -63,7 +65,11 @@ function send() {
     //URL for Marvel
     // https://gateway.marvel.com:443/v1/public/characters?apikey=
 
-    var queryUrl = "https://superheroapi.com/api/" + superHeroCode + "/character-id";
+    //Flickr URLs
+    // https://api.flickr.com/services
+    // https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
+
+    var queryUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&text=spiderman&api_key=" + flickrCode;
 
     $.ajax({
         url: queryUrl,
@@ -75,5 +81,5 @@ function send() {
     
 }
 
-//Calls API function
+//Calls API function (check console)
 send();
