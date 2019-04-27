@@ -3,6 +3,7 @@ var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
 var marvelPrivateCode = "9db81123b9e0468057cbf6012e17f9d53bf811d0";
 var flickrCode = "bd21b96440233c2b507b7ec450da5ec1";
 
+//these variables are for the game logic
 var gameHealth;
 var gameUser;
 var gameKey;
@@ -17,7 +18,7 @@ var gameClicks;
 //Handle when hero health is below zero (change state to done)
 
 
-function resetGame(){
+function resetGame() {
     gameState = "start";
     gameHealth = 0;
     gameUser = "";
