@@ -3,6 +3,7 @@
 	font-size: 5em;
 	text-align: center;
     text-shadow: 2px 2px #FF0000;
+    background-color: 
 }
 
 
@@ -25,5 +26,50 @@
 h3 {
 	font-family: Piedra;
 	text-shadow: 2px 2px #FF0000;
+	font-size: 2em;
+	padding-bottom: 300px;
 
 }
+
+header,
+nav,
+.player_1,
+.player_2,
+footer {
+  display: block;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  background: #ebebeb;
+}
+
+.player_1 {
+  display: block;
+  font-family: Piedra;
+  text-shadow: 2px 2px #FF0000;
+  font-size: 2em;
+  float: left;
+  width: 495px;
+  height: 400px;
+  overflow: hidden;
+  padding-bottom: 300px;
+}
+
+.player_2 {
+  display: block;
+  font-family: Piedra;
+  text-shadow: 2px 2px #FF0000;
+  font-size: 2em;
+  float: right;
+  width: 40%;
+  height: 400px;
+  overflow: hidden;
+  padding-bottom: 300px;padding-bottom: 300px;
+}
+
+
+.score {
+	padding-bottom: 270px;
+}
+
+
