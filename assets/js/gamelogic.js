@@ -16,6 +16,7 @@ var gameClicks;
 //update hostId here upon game value changes
 //Handle when hero health is below zero (change state to done)
 
+
 function resetGame(){
     gameState = "start";
     gameHealth = 0;
@@ -25,28 +26,32 @@ function resetGame(){
 }
 
 
-function setName(){
-    if(gameState === "start"){
+function setName() {
+    if (gameState === "start") {
+{
 
         //set user name
         //push connection/user info to server
     }
 }
 
-function updateGameDb(){
+
+function updateGameDb() {
     //Updates DB with who is host and other game values
 }
 
-function attackButton(){
-    if(gameState === "fight"){
-        if(gameHealth > 0){
+function attackButton() {
+    if (gameState === "fight") {
+        if (gameHealth > 0) {
             gameHealth--;
         }
     }
 }
 
-function startButton(){
-    if(gameState === "start" && gameKey === gameHost){
+
+function startButton() {
+    if (gameState === "start" && gameKey === gameHost) {
+
         //begin timer for fight phase
         //wait
         //choose hero
@@ -69,16 +74,17 @@ function send() {
     // https://api.flickr.com/services
     // https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
 
-    var queryUrl = "https://api.flickr.com/services/rest/?method=flickr.photos.search&text=spiderman&api_key=" + flickrCode;
+
+    var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
 
     $.ajax({
         url: queryUrl,
         method: "GET"
-    }).then(function(response){
+
+    }).then(function (response) {
         console.log(response);
     });
 
-    
 }
 
 //Calls API function (check console)
