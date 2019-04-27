@@ -73,18 +73,8 @@ function startButton() {
     }
 }
 
-function send() {
-    //URL for SuperHero DB (not working)
-    //https://superheroapi.com/api/384939068772291/character-id
-    //https://superheroapi.com/api/384939068772291/character-id/powerstats
-
-    //URL for Marvel
+function send() {//URL for Marvel
     // https://gateway.marvel.com:443/v1/public/characters?apikey=
-
-    //Flickr URLs
-    // https://api.flickr.com/services
-    // https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
-
 
     var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
 
@@ -98,20 +88,7 @@ function send() {
 
 }
 
-function flickr(){
-    var queryUrl = "https://api.flickr.com/services/rest/?method=flickr.test.echo&api_key=" + flickrCode;
-
-    $.ajax({
-        url: queryUrl,
-        method: "GET"
-
-    }).then(function (response) {
-        console.log("Flickr response:" + response);
-        console.log(response);
-    });
-}
 
 //test
 //Calls API function (check console)
 send();
-flickr();
