@@ -16,7 +16,8 @@ var gameClicks;
 //update hostId here upon game value changes
 //Handle when hero health is below zero (change state to done)
 
-function resetGame() {
+
+function resetGame(){
     gameState = "start";
     gameHealth = 0;
     gameUser = "";
@@ -27,11 +28,13 @@ function resetGame() {
 
 function setName() {
     if (gameState === "start") {
+{
 
         //set user name
         //push connection/user info to server
     }
 }
+
 
 function updateGameDb() {
     //Updates DB with who is host and other game values
@@ -45,8 +48,10 @@ function attackButton() {
     }
 }
 
+
 function startButton() {
     if (gameState === "start" && gameKey === gameHost) {
+
         //begin timer for fight phase
         //wait
         //choose hero
@@ -69,15 +74,16 @@ function send() {
     // https://api.flickr.com/services
     // https://api.flickr.com/services/rest/?method=flickr.test.echo&name=value
 
+
     var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
 
     $.ajax({
         url: queryUrl,
         method: "GET"
+
     }).then(function (response) {
         console.log(response);
     });
-
 
 }
 
