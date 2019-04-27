@@ -41,30 +41,37 @@
     	</heading>
 	      <div class="score">0</div>
 
-        <button type="button" class="btn btn-danger btn-lg">ATTACK</button>
+
+        <button id="btn-team1" type="button" class="btn btn-danger btn-lg">ATTACK</button>
 	    </div>
 
-  	<div class="player_2">
+  	      <div class="player_2">
 
-    <heading>
+        <heading>
     	<div>
     		<div class="player">PLAYER II</div>
     	</div>
-    </heading>
+        </heading>
     		<div class="score">0</div>
 
-    <button type="button" class="btn btn-danger btn-lg">ATTACK</button>
-    </div>
+        <button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+        </div>
     
-   </div>
+       </div>
 	    </div>
-	  </div>
+	   </div>
 
 	  <div class="row">
 	    <div class="col-md-12">
 	      BUTTON FIELD
 	    </div>
 	  </div>
+	  <div id="user_name">
+            <form>
+                <label id="screen-name" for="chat-input"></label>
+                <input id="chat-input" type="text" ><input id="submit-chat" value="Send" type="submit">
+            </form>
+        </div>
 
 	  <div class="row">
 	    <div class="col-md-2">
@@ -74,7 +81,11 @@
 
 	  <div class="row">
 	    <div class="col-md-12">
-	      CHAT FIELD
+	      <div id="chat"></div>
+        <div id="chat-bar">
+            <form>
+                <label id="screen-name" for="chat-input"></label>
+                <input id="chat-input" type="text" ><input id="submit-chat" value="Send" type="submit">
 	    </div>
 	  </div>
 
