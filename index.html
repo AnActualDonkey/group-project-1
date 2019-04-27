@@ -2,113 +2,96 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Injustice Lite</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Piedra" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Injustice Lite</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Piedra" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <div class="container">
-      	<div class="row">
-          <div class="col-md-12">
-      <div class="jumbotron">
-  		<h1 class="title">Hero Battle</h1>
-  		<p class="subtitle">Who will win this battle of elite forces?</p>
-  	  </div>
-    </div>
-  	</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h1 class="title">Hero Battle</h1>
+				<p class="subtitle">Who will win this battle of elite forces?</p>
+			</div>
+		</div>
+	</div>
 
-	  <div class="row">
-	    <div class="col-md-8">
-	      CONTENT
-	    </div>
-	    
-	  </div>
-	  <div class="row">
-	    <div class="col-md-12">
-	     <div id="gamearea">
-  	  	<div class="player_1">
-    	<heading>
-    	<div>
-	      <div class="player">PLAYER I</div>
-    	</div>
-    	</heading>
-	      <div class="score">0</div>
+	<div class="row">
+		<div class="col-md-8">
+			CONTENT
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="gamearea">
+				<div class="player_1">
+					<heading>
+						<div>
+							<div class="player">PLAYER I</div>
+						</div>
+					</heading>
+					<div class="score">0</div>
 
 
-        <button id="btn-team1" type="button" class="btn btn-danger btn-lg">ATTACK</button>
-	    </div>
+					<button id="btn-team1" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+				</div>
 
-  	      <div class="player_2">
+				<div class="player_2">
+					<heading>
+						<div>
+							<div class="player">PLAYER II</div>
+						</div>
+					</heading>
+					<div class="score">0</div>
 
-        <heading>
-    	<div>
-    		<div class="player">PLAYER II</div>
-    	</div>
-        </heading>
-    		<div class="score">0</div>
+					<button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+				</div>
 
-        <button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
-        </div>
-    
-       </div>
-	    </div>
-	   </div>
+			</div>
+		</div>
+	</div>
 
-	  <div class="row">
-	    <div class="col-md-12">
-	      BUTTON FIELD
-	    </div>
-	  </div>
-	  <div id="user_name">
-            <form>
-                <label id="screen-name" for="chat-input"></label>
-                <input id="chat-input" type="text" ><input id="submit-chat" value="Send" type="submit">
-            </form>
-        </div>
+	<div class="row">
+		<div class="col-md-12">
+			BUTTON FIELD
+		</div>
+	</div>
+	<div id="user_name">
+		<form>
+			<label id="username-label" for="chat-input">Enter Name</label>
+			<input id="username-input" type="text"><input id="submit-username" value="Enter" type="submit">
+		</form>
+	</div>
 
-	  <div class="row">
-	    <div class="col-md-2">
-	      STATISTICS FIELD
-	    </div>
-	  </div>
+	<div class="row">
+		<div class="col-md-2">
+			STATISTICS FIELD
+		</div>
+	</div>
 
-	  <div class="row">
-	    <div class="col-md-12">
-	      <div id="chat"></div>
-        <div id="chat-bar">
-            <form>
-                <label id="screen-name" for="chat-input"></label>
-                <input id="chat-input" type="text" ><input id="submit-chat" value="Send" type="submit">
-	    </div>
-	  </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div id="chat"></div>
+			<div id="chat-bar">
+				<form>
+					<label id="screen-name" for="chat-input"></label>
+					<input id="chat-input" type="text"><input id="submit-chat" value="Send" type="submit">
+			</div>
+		</div>
 
 	</div>
 
-  	 
 
-
-
-
-
-
-
-
-
-
-
-
-   </div>
-      
-
-
-
+</div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
