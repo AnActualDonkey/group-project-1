@@ -6,6 +6,7 @@ var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
 var playerName;
 var playerKey;
 var playerClicks;
+
 var playerTeam;
 
 var initialHealth = 10;
@@ -14,9 +15,15 @@ var defaultHost = "no-host-entered";
 var gameState = "initial";
 var gameHost = defaultHost;
 var gameHeroName;
+
 var gameHeroes = [];
-var gameState;
-var gameClicks;
+var gameConnections = [];
+
+var teamHealth1;
+var teamHero1;
+
+var teamHealth2;
+var teamHero2;
 
 
 
@@ -133,6 +140,7 @@ function checkGame(){
 }
 
 function resetGame() {
+
     gameState = "initial";
     
     playerClicks = 0;
@@ -153,9 +161,10 @@ function resetGame() {
 }
 
 
-function setName() {
+function setName(name) {
     if (gameState === "start") {
-
+        playerName = name;
+        console.log("Name set: " + name);
         //set user name
         //push connection/user info to server
     }
@@ -206,6 +215,7 @@ function attackTeam1(){
     teamHealth1--;
 }
 
+
 function attackTeam2(){
     teamHealth2--;
 }
@@ -232,6 +242,7 @@ $("#btn-team2").on("click", function(){
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
     }
     
+
 });
 
 $("#submit-username").on("click", function(event){
@@ -275,6 +286,7 @@ $("#start-button").on("click", function(){
         setTimeout(function(){console.log("FIGHT!"); gameState = "fight";}, 3000);        
     }
 });
+
 
 //test
 //Calls API function (check console)
