@@ -2,14 +2,21 @@ var fbKey = "AIzaSyChz5y9l2HLc7BpjOxXQAt3R1mjSH0tA3A";
 var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
 
 //these variables are for the game logic
-var gameHealth;
-var gameUser;
-var gameKey;
-var gameHost;
-var gameHeroName;
-var gameHeroes = [];
+
+var playerName;
+var playerKey;
+var playerClicks;
+
 var gameState;
-var gameClicks;
+var gameHost;
+var gameHeroes = [];
+var gameConnections = [];
+
+var teamHealth1;
+var teamHero1;
+
+var teamHealth2;
+var teamHero2;
 
 
 //Initialize Firebase
@@ -31,16 +38,23 @@ firebase.initializeApp(config);
 
 function resetGame() {
     gameState = "start";
-    gameHealth = 0;
+    
+    teamHealth1 = 1000;
+    teamHero1 = "";
+    
+    teamHealth2 = 1000;
+    teamHero2 = "";
+
     gameUser = "";
     gameKey = "";
     gameClicks = 0;
 }
 
 
-function setName() {
+function setName(name) {
     if (gameState === "start") {
-
+        playerName = name;
+        console.log("Name set: " + name);
         //set user name
         //push connection/user info to server
     }
@@ -88,6 +102,25 @@ function send() {//URL for Marvel
 
 }
 
+function attackTeam1(){
+    teamHealth1--;
+}
+
+
+$("#btn-team1").on("click", function(){
+    attackTeam1();
+    console.log("Attacked Team 1 (Health: " + teamHealth1 + ")");
+});
+
+$("#submit-username").on("click", function(event){
+    event.preventDefault();
+    setName($("#username-input").val().trim());
+    $("#username-input").val("");
+})
+
+$(document).ready(function(){
+    resetGame();
+});
 
 //test
 //Calls API function (check console)
