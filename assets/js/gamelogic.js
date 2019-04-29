@@ -8,12 +8,17 @@ var playerKey;
 var playerClicks;
 var playerTeam;
 
+var initialHealth = 10;
+var defaultHost = "no-host-entered";
+
 var gameState = "initial";
-var gameHost;
+var gameHost = defaultHost;
 var gameHeroName;
 var gameHeroes = [];
 var gameState;
 var gameClicks;
+
+
 
 //Firebae variables
 var database;
@@ -71,6 +76,9 @@ connectionsRef.on("value", function(snapshot){
     if((gameState === "initial")){
         var teamCount = 0;
         var childKeys = [];
+        
+
+        
         console.log(snapshot.child);
         snapshot.forEach(function(child) {
             childKeys.push(child.key);
@@ -84,6 +92,10 @@ connectionsRef.on("value", function(snapshot){
             }
             teamCount++;
         });
+
+        if(!(childKeys.includes(gameHost)) && (gameHost !== defaultHost)){
+            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, childKeys[0], gameState);
+        }
     }
 });
 
@@ -106,7 +118,7 @@ gameRef.on("value", function(snapshot){
 
     if(gameState === "fight"){
         if((teamHealth1 <= 0) || (teamHealth2 <= 0)){
-            gameState = "done";
+            gameState = "initial";
             updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
             //Need to set game back to initial state
             //Soft reset function
@@ -131,7 +143,7 @@ function resetGame() {
     teamHealth2 = 10;
     teamHero2 = "";
 
-    gameHost = "no-host-entered";
+    gameHost = defaultHost;
 
     gameUser = "";
     gameKey = "";
@@ -198,6 +210,9 @@ function attackTeam2(){
     teamHealth2--;
 }
 
+function prepFight(){
+    updateGameDb(initialHealth, initialHealth, teamHero1, teamHero2, gameHost, gameState);
+}
 
 $("#btn-team1").on("click", function(){
     if((gameState === "fight") && (teamHealth1 > 0) && (playerTeam === 1)){
@@ -226,7 +241,7 @@ $("#submit-username").on("click", function(event){
         setName($("#username-input").val().trim());
         $("#username-input").val("");
 
-        if(gameHost === "no-host-entered"){
+        if(gameHost === defaultHost){
             gameHost = playerKey.key;
         }
 
@@ -243,6 +258,10 @@ $("#check-button").on("click", function(){
     checkGame();
 });
 
+$("#reset-button").on("click", function(){
+    resetGame();
+});
+
 $("#start-button").on("click", function(){
     if (gameState === "initial" && playerKey.key === gameHost) {
         //begin timer for fight phase
@@ -252,6 +271,7 @@ $("#start-button").on("click", function(){
         //update server game values
         //start timer for fight phase
         console.log("Preparing to fight...");
+        prepFight();
         setTimeout(function(){console.log("FIGHT!"); gameState = "fight";}, 3000);        
     }
 });
