@@ -14,152 +14,107 @@
 </head>
 
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="jumbotron">
-				<h1 class="title">Hero Battle</h1>
-				<p class="subtitle">Who will win this battle of elite forces?</p>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h1 class="title">Hero Battle</h1>
+					<p class="subtitle">Who will win this battle of elite forces?</p>
+				</div>
 			</div>
 		</div>
-	</div>
 
-			<div class="row">
+		<div class="row">
 
-				<div class="col-md-6">
+			<div class="col-md-6">
 
-					<div class="row">
+				<div class="row">
 
-						<div class="col-md-12">
-				  		<div class="player_1">
+					<div class="col-md-12">
+						<div class="player-1">
+							<div class="player hero-box-1">
 								<heading>
-									<div>
-										<div class="player">PLAYER I</div>
-									</div>
+									PLAYER I
 								</heading>
-									<div class="score">0</div>
-				      </div>
-					  </div>
-				  </div>
-
-					<div class="row">
-							<div class="col-md-12">
-								Status Box I
 							</div>
+							<div class="score-1">0</div>
+						</div>
 					</div>
+				</div>
 
-					<div class="row">
-						  <div class="col-md-12">
-							<button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
-				  	  </div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="status-box-1">
+							Status Box I
+						</div>
 					</div>
-			  </div>
+				</div>
 
-		  <div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<button id="btn-team-1" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+					</div>
+				</div>
+			</div>
 
-					<div class="row">
+			<div class="col-md-6">
 
-						<div class="col-md-12">
-				  		<div class="player_1">
+				<div class="row">
+
+					<div class="col-md-12">
+						<div class="player-2">
+							<div class="player hero-box-2">
 								<heading>
-									<div>
-										<div class="player">PLAYER II</div>
-									</div>
+									PLAYER II
 								</heading>
-									<div class="score">0</div>
-				      </div>
-					  </div>
-				  </div>
-
-					<div class="row">
-							<div class="col-md-12">
-								Status Box II
 							</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-12">
-							<button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
-				  </div>
-					</div>
-					
-				</div>
-			</div>
-	
-
-
-
-
-	</div>
-	<!--- <div class="row">
-		<div class="col-md-12">
-			<div id="gamearea">
-				<div class="player_1">
-					<heading>
-						<div>
-							<div class="player">PLAYER I</div>
+							<div class="score-2">0</div>
 						</div>
-					</heading>
-					<div class="score">0</div>
-
-
-					<button id="btn-team1" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+					</div>
 				</div>
 
-				<div class="player_2">
-					<heading>
-						<div>
-							<div class="player">PLAYER II</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="status-box-2">
+							Status Box II
 						</div>
-					</heading>
-					<div class="score">0</div>
-
-					<button id="btn-team2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-12">
+						<button id="btn-team-2" type="button" class="btn btn-danger btn-lg">ATTACK</button>
+					</div>
+				</div>
+				
 			</div>
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			BUTTON FIELD
+		<div id="control-box">
+			Control
 		</div>
-	</div>
-	<button id="check-button">CHECK</button>
-	<button id="start-button">Start</button>
-	<button id="reset-button">Reset</button>
-	<div id="user_name">
-		<form>
-			<label id="username-label" for="chat-input">Enter Name</label>
-			<input id="username-input" type="text"><input id="submit-username" value="Enter" type="submit">
-		</form>
-	</div>
-
-	<div class="row">
-		<div class="col-md-2">
-			STATISTICS FIELD
+		<div id="chat-box">
+			Chat
 		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div id="chat"></div>
-			<div id="chat-bar">
+		<div id="admin-panel">
+			<button id="check-button">CHECK</button>
+			<button id="start-button">Start</button>
+			<button id="reset-button">Reset</button>
+			<div id="user_name">
 				<form>
-					<label id="screen-name" for="chat-input"></label>
-					<input id="chat-input" type="text"><input id="submit-chat" value="Send" type="submit">
+					<label id="username-label" for="chat-input">Enter Name</label>
+					<input id="username-input" type="text"><input id="submit-username" value="Enter" type="submit">
+				</form>
 			</div>
 		</div>
 
+
+
 	</div>
+		
 
-
-</div> -->
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
-<script type="text/javascript" src="assets/js/gamelogic.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
+	<script type="text/javascript" src="assets/js/gamelogic.js"></script>
 </body>
 
 </html>
