@@ -297,9 +297,9 @@ $("#start-button").on("click", function () {
 
 function send() {
 
-    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=" + marvelPublicCode;
-    var capUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Captain%20America&apikey=" + marvelPublicCode;
-    var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&ts=1&apikey=9c9ee8837ea5626e53f61a1af4ddf211&hash=9db81123b9e0468057cbf6012e17f9d53bf811d0"
+    var spUrl = "https://gateway.marvel.com:443/v1/public/characters/Spider-Man?apikey=" + marvelPublicCode;
+    var capUrl = "https://gateway.marvel.com:443/v1/public/characters/Thor?apikey=" + marvelPublicCode;
+    var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
 
     $.ajax({
         url: spUrl,
@@ -307,19 +307,23 @@ function send() {
 
     }).then(function (response) {
         console.log("Testing Spiderman URL: " + response);
-    });
-    $.ajax({
-        url: capUrl,
-        method: "GET"
 
-    }).then(function (response) {
-        console.log("Testing Cap URL: " + response);
+        for (key in response) {
+            console.log(key);
+        }
     });
-    $.ajax({
-        url: vultureUrl,
-        method: "GET"
+    // $.ajax({
+    //     url: capUrl,
+    //     method: "GET"
 
-    }).then(function (response) {
-        console.log("Testing Vulture URL: " + response);
-    });
+    // }).then(function (response) {
+    //     console.log("Testing Cap URL: " + response);
+    // });
+    // $.ajax({
+    //     url: vultureUrl,
+    //     method: "GET"
+
+    // }).then(function (response) {
+    //     console.log("Testing Vulture URL: " + response);
+    // });
 }
