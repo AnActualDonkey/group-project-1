@@ -1,11 +1,32 @@
 var fbKey = "AIzaSyChz5y9l2HLc7BpjOxXQAt3R1mjSH0tA3A";
 var marvelPublicCode = "9c9ee8837ea5626e53f61a1af4ddf211";
 
+//Hero class
+class Hero {
+    constructor(id, name, bio, thumb, image, moving, stopped) {
+        this.id = id;
+        this.name = name;
+        this.bio = bio;
+        this.thumb = thumb;
+        this.image = image;
+        this.moving = moving;
+        this.stopped = stopped;
+    }
+}
+
+//Pair class
+class Pair {
+    constructor(good, bad) {
+        this.good = good;
+        this.bad = bad;
+    }
+}
+
 //these variables are for the game logic
 
 var playerName;
 var playerKey;
-var playerClicks;
+var playerClicks = 0;
 
 var playerTeam;
 
@@ -119,6 +140,9 @@ gameRef.on("value", function (snapshot) {
     teamHealth1 = snapshot.val().health1;
     teamHealth2 = snapshot.val().health2;
 
+    $(".status-box-1").text("Health: " + teamHealth1 + " | Clicks: " + playerClicks + " | Username: " + playerName);
+    $(".status-box-2").text("Health: " + teamHealth2 + " | Clicks: " + playerClicks + " | Username: " + playerName);
+
     if ((playerKey.key === gameHost) && (gameState === "initial")) {
         //Make start button visible
     }
@@ -127,6 +151,7 @@ gameRef.on("value", function (snapshot) {
         if ((teamHealth1 <= 0) || (teamHealth2 <= 0)) {
             gameState = "initial";
             updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+            prepFight();
             //Need to set game back to initial state
             //Soft reset function
         }
@@ -162,7 +187,7 @@ function resetGame() {
 
 
 function setName(name) {
-    if (gameState === "start") {
+    if (gameState === "initial") {
         playerName = name;
         console.log("Name set: " + name);
         //set user name
