@@ -316,16 +316,16 @@ function send() {
     }).then(function (response) {
         console.log(response);
         console.log("Typecheck: " + typeof response);
-        console.log("Testing Thor URL: " + response[0].data.results);
+        console.log("Testing Thor URL: " + response.data.results[0]);
         for (key in response.data.results) {
             console.log(key);
         }
-        console.log("Character ID: " + response[0].data.results.id);
-        console.log("Character Name: " + response[0].data.results.name);
-        console.log("Character Description: " + response[0].data.results.description);
-        console.log("Character Thumbnail: " + response[0].data.results.thumbnail);
-        console.log("Character Image: " + response[0].data.results.thumbnail.path);
-        console.log("Character Image: " + response[0].data.results.thumbnail.extension)
+        console.log("Character ID: " + response.data.results[0].id);
+        console.log("Character Name: " + response.data.results[0].name);
+        console.log("Character Description: " + response.data.results[0].description);
+        console.log("Character Thumbnail: " + response.data.results[0].thumbnail);
+        console.log("Character Image: " + response.data.results[0].thumbnail.path);
+        console.log("Character Image: " + response.data.results[0].thumbnail.extension)
 
     });
 
