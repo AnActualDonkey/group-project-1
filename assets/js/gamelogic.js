@@ -318,7 +318,10 @@ function send() {
         method: "GET"
 
     }).then(function (response) {
-        console.log("Testing Thor URL: " + response);
+        console.log("Testing Thor URL: " + response.data);
+        for (key in response.data) {
+            console.log(key);
+        }
     });
 
     // $.ajax({
