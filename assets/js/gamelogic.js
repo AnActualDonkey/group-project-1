@@ -297,8 +297,8 @@ $("#start-button").on("click", function () {
 
 function send() {
 
-    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=" + marvelPublicCode;
-    var capUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
+    var spUrl = "http://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=100&apikey=" + marvelPublicCode;
+    var thorUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
     var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
 
     $.ajax({
@@ -306,19 +306,19 @@ function send() {
         method: "GET"
 
     }).then(function (response) {
-        console.log("Testing Spiderman URL: " + response);
+        console.log("Testing Character List: " + response);
 
         for (key in response) {
             console.log(key);
         }
     });
-    // $.ajax({
-    //     url: capUrl,
-    //     method: "GET"
+    $.ajax({
+        url: thorUrl,
+        method: "GET"
 
-    // }).then(function (response) {
-    //     console.log("Testing Cap URL: " + response);
-    // });
+    }).then(function (response) {
+        console.log("Testing Thor URL: " + response);
+    });
     // $.ajax({
     //     url: vultureUrl,
     //     method: "GET"
