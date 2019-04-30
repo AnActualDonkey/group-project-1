@@ -297,30 +297,35 @@ $("#start-button").on("click", function () {
 
 function send() {
 
-    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=100&apikey=" + marvelPublicCode;
+    //var spUrl = "https://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=100&apikey=" + marvelPublicCode;
     var thorUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
-    var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
+    //var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
 
-    $.ajax({
-        url: spUrl,
-        method: "GET"
+    // $.ajax({
+    //     url: spUrl,
+    //     method: "GET"
 
-    }).then(function (response) {
-        console.log("Testing Character List: " + response);
-    });
+    // }).then(function (response) {
+    //     console.log("Testing Character List: " + response);
+    // });
 
     $.ajax({
         url: thorUrl,
         method: "GET"
 
     }).then(function (response) {
-        console.log("Testing Thor URL: " + response.data);
-        console.log("Character ID: " + response.data.results.id);
-        console.log("Character Name: " + response.data.results.name);
-        console.log("Character Description: " + response.data.results.description);
-        console.log("Character Thumbnail: " + response.data.results.thumbnail);
-        console.log("Character Image: " + response.data.results.thumbnail.path);
-        console.log("Character Image: " + response.data.results.thumbnail.extension)
+        console.log(response);
+        console.log("Typecheck: " + typeof response);
+        console.log("Testing Thor URL: " + response[0].data.results);
+        for (key in response.data.results) {
+            console.log(key);
+        }
+        console.log("Character ID: " + response[0].data.results.id);
+        console.log("Character Name: " + response[0].data.results.name);
+        console.log("Character Description: " + response[0].data.results.description);
+        console.log("Character Thumbnail: " + response[0].data.results.thumbnail);
+        console.log("Character Image: " + response[0].data.results.thumbnail.path);
+        console.log("Character Image: " + response[0].data.results.thumbnail.extension)
 
     });
 
