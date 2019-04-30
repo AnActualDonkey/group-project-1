@@ -53,7 +53,7 @@ connectionsRef = database.ref("connections");
 connectedRef = database.ref(".info/connected");
 
 
-connectedRef.on("value", function(snapshot) {
+connectedRef.on("value", function (snapshot) {
     // If they are connected..
     if (snapshot.val()) {
 
@@ -75,32 +75,32 @@ connectedRef.on("value", function(snapshot) {
         console.log("Connection id: " + playerKey);
         console.log("Type: " + playerKey.key);
     }
-}, function(errorObject){
+}, function (errorObject) {
     console.log(errorObject.code);
 });
 
-connectionsRef.on("value", function(snapshot){
-    if((gameState === "initial")){
+connectionsRef.on("value", function (snapshot) {
+    if ((gameState === "initial")) {
         var teamCount = 0;
         var childKeys = [];
-        
 
-        
+
+
         console.log(snapshot.child);
-        snapshot.forEach(function(child) {
+        snapshot.forEach(function (child) {
             childKeys.push(child.key);
             teamSet = (teamCount % 2) + 1;
             database.ref("/connections/" + child.key).set({
                 team: teamSet
             });
-            
-            if(child.key === playerKey.key){
+
+            if (child.key === playerKey.key) {
                 playerTeam = teamSet;
             }
             teamCount++;
         });
 
-        if(!(childKeys.includes(gameHost)) && (gameHost !== defaultHost)){
+        if (!(childKeys.includes(gameHost)) && (gameHost !== defaultHost)) {
             updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, childKeys[0], gameState);
         }
     }
@@ -111,7 +111,7 @@ connectionsRef.on("value", function(snapshot){
 //Handle when hero health is below zero (change state to done)
 //If either team health is 0, change game state to end
 //Then update()
-gameRef.on("value", function(snapshot){
+gameRef.on("value", function (snapshot) {
     gameState = snapshot.val().gameState;
     gameHost = snapshot.val().host;
     teamHero1 = snapshot.val().hero1;
@@ -119,12 +119,12 @@ gameRef.on("value", function(snapshot){
     teamHealth1 = snapshot.val().health1;
     teamHealth2 = snapshot.val().health2;
 
-    if((playerKey.key === gameHost) && (gameState === "initial")){
+    if ((playerKey.key === gameHost) && (gameState === "initial")) {
         //Make start button visible
     }
 
-    if(gameState === "fight"){
-        if((teamHealth1 <= 0) || (teamHealth2 <= 0)){
+    if (gameState === "fight") {
+        if ((teamHealth1 <= 0) || (teamHealth2 <= 0)) {
             gameState = "initial";
             updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
             //Need to set game back to initial state
@@ -133,7 +133,7 @@ gameRef.on("value", function(snapshot){
     }
 })
 
-function checkGame(){
+function checkGame() {
     console.log("Health 1:" + teamHealth1);
     console.log("Health 2:" + teamHealth2);
     console.log("Team:" + playerTeam);
@@ -142,12 +142,12 @@ function checkGame(){
 function resetGame() {
 
     gameState = "initial";
-    
+
     playerClicks = 0;
 
     teamHealth1 = 10;
     teamHero1 = "";
-    
+
     teamHealth2 = 10;
     teamHero2 = "";
 
@@ -193,7 +193,7 @@ function attackButton() {
 
 
 function startButton() {
-    
+
 }
 
 function send() {//URL for Marvel
@@ -211,48 +211,48 @@ function send() {//URL for Marvel
 
 }
 
-function attackTeam1(){
+function attackTeam1() {
     teamHealth1--;
 }
 
 
-function attackTeam2(){
+function attackTeam2() {
     teamHealth2--;
 }
 
-function prepFight(){
+function prepFight() {
     updateGameDb(initialHealth, initialHealth, teamHero1, teamHero2, gameHost, gameState);
 }
 
-$("#btn-team1").on("click", function(){
-    if((gameState === "fight") && (teamHealth1 > 0) && (playerTeam === 1)){
+$("#btn-team1").on("click", function () {
+    if ((gameState === "fight") && (teamHealth1 > 0) && (playerTeam === 1)) {
         attackTeam1();
         playerClicks++;
         console.log("Attacked Team 1 (Health: " + teamHealth1 + ")");
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
     }
-    
+
 });
 
-$("#btn-team2").on("click", function(){
-    if((gameState === "fight") && (teamHealth2 > 0) && (playerTeam === 2)){
+$("#btn-team2").on("click", function () {
+    if ((gameState === "fight") && (teamHealth2 > 0) && (playerTeam === 2)) {
         attackTeam2();
         playerClicks++;
         console.log("Attacked Team 2 (Health: " + teamHealth2 + ")");
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
     }
-    
+
 
 });
 
-$("#submit-username").on("click", function(event){
+$("#submit-username").on("click", function (event) {
     event.preventDefault();
-    if(gameState === "initial"){
-        
+    if (gameState === "initial") {
+
         setName($("#username-input").val().trim());
         $("#username-input").val("");
 
-        if(gameHost === defaultHost){
+        if (gameHost === defaultHost) {
             gameHost = playerKey.key;
         }
 
@@ -261,19 +261,20 @@ $("#submit-username").on("click", function(event){
     }
 })
 
-$(document).ready(function(){
+$(document).ready(function () {
     // resetGame();
 });
 
-$("#check-button").on("click", function(){
+$("#check-button").on("click", function () {
     checkGame();
+    send();
 });
 
-$("#reset-button").on("click", function(){
+$("#reset-button").on("click", function () {
     resetGame();
 });
 
-$("#start-button").on("click", function(){
+$("#start-button").on("click", function () {
     if (gameState === "initial" && playerKey.key === gameHost) {
         //begin timer for fight phase
         //wait
@@ -283,11 +284,42 @@ $("#start-button").on("click", function(){
         //start timer for fight phase
         console.log("Preparing to fight...");
         prepFight();
-        setTimeout(function(){console.log("FIGHT!"); gameState = "fight";}, 3000);        
+        setTimeout(function () { console.log("FIGHT!"); gameState = "fight"; }, 3000);
     }
 });
 
 
 //test
 //Calls API function (check console)
-send();
+//send();
+
+//Testing Marvel Character calls
+
+function send() {
+
+    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=" + marvelPublicCode;
+    var capUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Captain%20America&apikey=" + marvelPublicCode;
+    var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&ts=1&apikey=9c9ee8837ea5626e53f61a1af4ddf211&hash=9db81123b9e0468057cbf6012e17f9d53bf811d0"
+
+    $.ajax({
+        url: spUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        console.log("Testing Spiderman URL: " + response);
+    });
+    $.ajax({
+        url: capUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        console.log("Testing Cap URL: " + response);
+    });
+    $.ajax({
+        url: vultureUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        console.log("Testing Vulture URL: " + response);
+    });
+}
