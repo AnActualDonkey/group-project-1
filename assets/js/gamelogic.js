@@ -297,8 +297,8 @@ $("#start-button").on("click", function () {
 
 function send() {
 
-    var spUrl = "https://gateway.marvel.com:443/v1/public/characters/Spider-Man?apikey=" + marvelPublicCode;
-    var capUrl = "https://gateway.marvel.com:443/v1/public/characters/Thor?apikey=" + marvelPublicCode;
+    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=" + marvelPublicCode;
+    var capUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
     var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
 
     $.ajax({
