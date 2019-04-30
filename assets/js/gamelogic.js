@@ -307,10 +307,6 @@ function send() {
 
     }).then(function (response) {
         console.log("Testing Character List: " + response);
-
-        for (key in response) {
-            console.log(key);
-        }
     });
 
     $.ajax({
@@ -319,9 +315,13 @@ function send() {
 
     }).then(function (response) {
         console.log("Testing Thor URL: " + response.data);
-        for (key in response.data) {
-            console.log(key);
-        }
+        console.log("Character ID: " + response.data.results.id);
+        console.log("Character Name: " + response.data.results.name);
+        console.log("Character Description: " + response.data.results.description);
+        console.log("Character Thumbnail: " + response.data.results.thumbnail);
+        console.log("Character Image: " + response.data.results.thumbnail.path);
+        console.log("Character Image: " + response.data.results.thumbnail.extension)
+
     });
 
     // $.ajax({
