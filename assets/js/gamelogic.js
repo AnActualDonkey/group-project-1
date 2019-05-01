@@ -346,16 +346,10 @@ function send() {
 
     getMarvelHero("Spider-Man");
     getMarvelHero("Thor");
-    getMarvelHero("Rhino");
-    getMarvelHero("Loki");
-    getMarvelHero("CaptainAmerica");
-    getMarvelHero("IronMan");
     getMarvelHero("Hulk");
-    getMarvelHero("StarLord");
     getMarvelHero("Thanos");
     getMarvelHero("Ultron");
-    getMarvelHero("Ronan");
-    getMarvelHero("Galactus");
-    getMarvelHero("Magneto");
     getMarvelHero("Wolverine");
+    // getMarvelHero("CaptainAmerica");
+    // getMarvelHero("IronMan");
 }
