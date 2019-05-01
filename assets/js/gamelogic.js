@@ -334,11 +334,11 @@ function getMarvelHero(heroName){
         for (key in response.data.results) {
             console.log(key);
         }
-        console.log("Character ID: " + response.data.results[0].id);
-        console.log("Character Name: " + response.data.results[0].name);
-        console.log("Character Description: " + response.data.results[0].description);
-        console.log("Character Thumbnail: " + response.data.results[0].thumbnail);
-        console.log("Character Image: " + response.data.results[0].thumbnail.path);
+        console.log(heroName + " ID: " + response.data.results[0].id);
+        console.log(heroName + " Name: " + response.data.results[0].name);
+        console.log(heroName + " Description: " + response.data.results[0].description);
+        console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail);
+        console.log(heroName + " Image: " + response.data.results[0].thumbnail.path);
     });
 }
 
