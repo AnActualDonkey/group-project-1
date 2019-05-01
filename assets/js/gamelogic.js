@@ -39,6 +39,7 @@ var gameHeroName;
 
 var gameHeroes = [];
 var gameConnections = [];
+var gamePlayers;
 
 var teamHealth1;
 var teamHero1;
@@ -102,6 +103,8 @@ connectedRef.on("value", function (snapshot) {
 });
 
 connectionsRef.on("value", function (snapshot) {
+    gamePlayers = snapshot.numChildren();
+
     if ((gameState === "initial")) {
         var teamCount = 0;
         var childKeys = [];
@@ -171,13 +174,20 @@ gameRef.on("value", function (snapshot) {
     $(".values-1").text("Health: " + teamHealth1 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
     $(".values-2").text("Health: " + teamHealth2 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
 
+    updatePanels();
+
+    
+})
+
+function updatePanels(){
     $("#control-team").text("Team: " + playerTeam);
     $("#control-name").text("Name: " + playerName);
     $("#control-clicks").text("Clicks: " + playerClicks);
+    $("#control-players").text("Players: " + gamePlayers);
 
     $("#health-bar-1").attr("style", "width: " + (teamHealth1/initialHealth)*100 + "%");
     $("#health-bar-2").attr("style", "width: " + (teamHealth2/initialHealth)*100 + "%");
-})
+}
 
 function checkGame() {
     console.log("Health 1:" + teamHealth1);
