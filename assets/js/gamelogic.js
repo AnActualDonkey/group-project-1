@@ -30,7 +30,7 @@ var playerClicks = 0;
 
 var playerTeam;
 
-var initialHealth = 10;
+var initialHealth = 25;
 var defaultHost = "no-host-entered";
 
 var gameState = "initial";
@@ -71,6 +71,7 @@ console.log(database);
 
 gameRef = database.ref("/game");
 connectionsRef = database.ref("connections");
+controlRef = database.ref("control");
 connectedRef = database.ref(".info/connected");
 
 
@@ -127,6 +128,10 @@ connectionsRef.on("value", function (snapshot) {
     }
 });
 
+controlRef.on("value", function (snapshot){
+    $("#control-box").text(snapshot.val().message);
+});
+
 //game ref
 //update hostId here upon game value changes
 //Handle when hero health is below zero (change state to done)
@@ -140,11 +145,17 @@ gameRef.on("value", function (snapshot) {
     teamHealth1 = snapshot.val().health1;
     teamHealth2 = snapshot.val().health2;
 
-    $(".status-box-1").text("Health: " + teamHealth1 + " | Clicks: " + playerClicks + " | Username: " + playerName);
-    $(".status-box-2").text("Health: " + teamHealth2 + " | Clicks: " + playerClicks + " | Username: " + playerName);
+    
+
+    
 
     if ((playerKey.key === gameHost) && (gameState === "initial")) {
+        playerClicks = 0;
         //Make start button visible
+    }
+
+    if(gameState === "initial"){
+        playerClicks = 0;
     }
 
     if (gameState === "fight") {
@@ -156,6 +167,12 @@ gameRef.on("value", function (snapshot) {
             //Soft reset function
         }
     }
+
+    $(".values-1").text("Health: " + teamHealth1 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
+    $(".values-2").text("Health: " + teamHealth2 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
+
+    $("#health-bar-1").attr("style", "width: " + (teamHealth1/initialHealth)*100 + "%");
+    $("#health-bar-2").attr("style", "width: " + (teamHealth2/initialHealth)*100 + "%");
 })
 
 function checkGame() {
@@ -170,10 +187,10 @@ function resetGame() {
 
     playerClicks = 0;
 
-    teamHealth1 = 10;
+    teamHealth1 = initialHealth;
     teamHero1 = "";
 
-    teamHealth2 = 10;
+    teamHealth2 = initialHealth;
     teamHero2 = "";
 
     gameHost = defaultHost;
@@ -183,6 +200,7 @@ function resetGame() {
     gameClicks = 0;
 
     updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+    controlRef.set({message: "Enter your name"});
 }
 
 
@@ -308,8 +326,14 @@ $("#start-button").on("click", function () {
         //update server game values
         //start timer for fight phase
         console.log("Preparing to fight...");
+        controlRef.set({message: "Perparing to fight..."});
+
         prepFight();
-        setTimeout(function () { console.log("FIGHT!"); gameState = "fight"; }, 3000);
+        setTimeout(function () {
+            controlRef.set({message: "FIGHT!!!"});
+            gameState = "fight";
+            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);}, 3000);
+        
     }
 });
 
