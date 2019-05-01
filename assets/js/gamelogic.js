@@ -344,13 +344,8 @@ function getMarvelHero(heroName){
 
 function send() {
 
-    // var spUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Spider-Man&apikey=" + marvelPublicCode;
-    // var thorUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
-    // var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
-    // var ironmanUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Iron-Man&apikey=" + marvelPublicCode;
-
     getMarvelHero("Spider-Man");
     getMarvelHero("Thor");
-    getMarvelHero("Vulture");
-    getMarvelHero("Iron-Man");
+    getMarvelHero("Rhino");
+    getMarvelHero("Loki");
 }
