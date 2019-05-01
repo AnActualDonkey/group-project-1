@@ -297,9 +297,9 @@ $("#start-button").on("click", function () {
 
 function send() {
 
-    //var spUrl = "https://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=100&apikey=" + marvelPublicCode;
+    var spUrl = "https://gateway.marvel.com:443/v1/public/characters?orderBy=name&limit=100&apikey=" + marvelPublicCode;
     var thorUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Thor&apikey=" + marvelPublicCode;
-    //var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
+    var vultureUrl = "https://gateway.marvel.com:443/v1/public/characters?name=Vulture&apikey=" + marvelPublicCode;
 
     // $.ajax({
     //     url: spUrl,
@@ -309,6 +309,23 @@ function send() {
     //     console.log("Testing Character List: " + response);
     // });
 
+    $.ajax({
+        url: spUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        console.log(response);
+        console.log("Typecheck: " + typeof response);
+        console.log("Testing Spiderman URL: " + response.data.results[0]);
+        for (key in response.data.results) {
+            console.log(key);
+        }
+        console.log("Character ID: " + response.data.results[0].id);
+        console.log("Character Name: " + response.data.results[0].name);
+        console.log("Character Description: " + response.data.results[0].description);
+        console.log("Character Thumbnail: " + response.data.results[0].thumbnail);
+        console.log("Character Image: " + response.data.results[0].thumbnail.path);
+    });
     $.ajax({
         url: thorUrl,
         method: "GET"
@@ -325,15 +342,22 @@ function send() {
         console.log("Character Description: " + response.data.results[0].description);
         console.log("Character Thumbnail: " + response.data.results[0].thumbnail);
         console.log("Character Image: " + response.data.results[0].thumbnail.path);
-        console.log("Character Image: " + response.data.results[0].thumbnail.extension)
-
     });
+    $.ajax({
+        url: vultureUrl,
+        method: "GET"
 
-    // $.ajax({
-    //     url: vultureUrl,
-    //     method: "GET"
-
-    // }).then(function (response) {
-    //     console.log("Testing Vulture URL: " + response);
-    // });
+    }).then(function (response) {
+        console.log(response);
+        console.log("Typecheck: " + typeof response);
+        console.log("Testing Vulture URL: " + response.data.results[0]);
+        for (key in response.data.results) {
+            console.log(key);
+        }
+        console.log("Character ID: " + response.data.results[0].id);
+        console.log("Character Name: " + response.data.results[0].name);
+        console.log("Character Description: " + response.data.results[0].description);
+        console.log("Character Thumbnail: " + response.data.results[0].thumbnail);
+        console.log("Character Image: " + response.data.results[0].thumbnail.path);
+    });
 }
