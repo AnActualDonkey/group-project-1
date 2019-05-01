@@ -2,13 +2,13 @@
 	font-family: Piedra;
 	font-size: 5em;
 	text-align: center;
-    text-shadow: 2px 2px #FF0000;
-    background-color: 
-    
+  text-shadow: 2px 2px #FF0000;
+  background-color: 
+
 }
 
 .jumbotron {
-  border:3px solid #000;
+  border:5px solid #000;
 
 }
 
@@ -38,15 +38,14 @@ h3 {
 }
 
 header,
-nav,
 .player-1,
-.player-2,
-footer {
+.player-2 {
   display: block;
   padding: 10px;
   margin: 10px;
   text-align: center;
   background: #ebebeb;
+  border-radius: 20px;
 }
 
 .player-1 {
@@ -58,7 +57,8 @@ footer {
   height: 400px;
   overflow: hidden;
   padding-bottom: 300px;
-  border:3px solid #000;
+  border:5px solid #000;
+  border-radius: 20px;
 }
 
 .player-2 {
@@ -70,7 +70,8 @@ footer {
   height: 400px;
   overflow: hidden;
   padding-bottom: 300px;
-  border:3px solid #000;
+  border:5px solid #000;
+  border-radius: 20px;
 }
 
 
@@ -97,7 +98,7 @@ button {
 }
 
 
-.example_c {
+.checkButton {
 color: #494949 !important;
 text-transform: uppercase;
 background: #ffffff;
@@ -107,26 +108,65 @@ border-radius: 6px;
 display: inline-block;
 }
 
-.example_c:hover {
+.checkButton:hover {
 color: #ffffff !important;
 background: #f6b93b;
 border-color: #f6b93b !important;
 transition: all 0.4s ease 0s;
 }
 
-.example_b {
+.startButton {
 color: #fff !important;
 text-transform: uppercase;
-background: #60a3bc;
+background: green;
 padding: 20px;
 border-radius: 50px;
 display: inline-block;
 border: none;
 }
 
-.example_b:hover {
+.startButton:hover {
 text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
 -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
 -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
 transition: all 0.4s ease 0s;
 }
+
+.resetButton {
+border: none;
+background: blue;
+color: #ffffff !important;
+font-weight: 100;
+padding: 20px;
+text-transform: uppercase;
+border-radius: 6px;
+display: inline-block;
+}
+
+.resetButton:hover {
+color: #404040 !important;
+font-weight: 700 !important;
+letter-spacing: 3px;
+background: none;
+-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+transition: all 0.3s ease 0s;
+}
+
+#centered_buttons { 
+  display: flex; 
+  justify-content: center; 
+}
+
+#control-box {
+background-color: #d3d3d3;
+border-radius: 10px;
+text-align: center;
+font-size: 2em;
+float: none;
+margin-left: 300px;
+margin-right: 300px;
+border: 5px solid #000;
+
+}
+
