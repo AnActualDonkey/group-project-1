@@ -42,6 +42,7 @@ var gameConnections = [];
 var gamePlayers;
 var gameTopClicks = 0;
 var gameTopClicker = "nobody";
+var gameCharacters = ["Spider-Man", "Thor", "Hulk", "Wolverine", "Ultron", "Thanos"];
 
 var teamHealth1;
 var teamHero1;
@@ -338,7 +339,7 @@ function setName(name) {
         playerName = name;
         console.log("Name set: " + name);
         //set user name
-        //push connection/user info to server
+        //push connection/user i nfo to server
         // database.ref("/connections/" + playerKey.key).set({
         //     team: teamSet,
         //     name: playerName,
@@ -372,15 +373,15 @@ function attackButton() {
 function startButton() {
 
 }
-
+ 
 function send() {//URL for Marvel
     // https://gateway.marvel.com:443/v1/public/characters?apikey=
-
-    var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
-
+ 
+var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
+  
     $.ajax({
         url: queryUrl,
-        method: "GET"
+        method: "GET" 
 
     }).then(function (response) {
         console.log(response);
@@ -390,18 +391,18 @@ function send() {//URL for Marvel
 
 function attackTeam1() {
     teamHealth1--;
-}
+}    
 
 
 function attackTeam2() {
-    teamHealth2--;
-}
+teamHealth2--;
+}    
 
-function prepFight() {
+function prepFight() { 
     updateGameDb(initialHealth, initialHealth, teamHero1, teamHero2, gameHost, gameState);
 }
-
-$("#btn-team-1").on("click", function () {
+     
+        $("#btn-team-1").on("click", function () {
     if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 1)) {
         attackTeam1();
         playerClicks++;
@@ -470,7 +471,7 @@ $(document).ready(function () {
 
 $("#check-button").on("click", function () {
     checkGame();
-    send();
+    grabGifs(gameCharacters[0]);
 });
 
 $("#reset-button").on("click", function () {
@@ -542,9 +543,26 @@ function send() {
     // getMarvelHero("IronMan");
 }
 
+
 // function makeHeroObject(heroName){
 //     var marvelInfo = getMarvelHero(heroName);
 //     var gifInfo = grabGifs(heroName);
 
 //     var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, marvelInfo.thumb. gifInfo.moving);
 // }
+
+
+function grabGifs(heroName){
+
+    var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + heroName + "&api_key=xmoCxA5GrmbWp0DeDscuQgiMn1KQt4FW";
+
+    $.ajax({
+        url: giphyURL,
+        method: "GET"
+    }).then(function(response){
+        console.log(response.data[0].images.original_still.url);
+        console.log(response.data[0].images.original.url);
+    })
+}
+
+
