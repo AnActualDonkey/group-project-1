@@ -473,7 +473,7 @@ $("#check-button").on("click", function () {
     checkGame();
     // grabGifs(gameCharacters[0]);
     for(var i = 0; i < gameCharacters.length; i++){
-        console.log(makeHeroObject(gameCharacters[i]));
+        makeHeroObject(gameCharacters[i]);
     }
 });
 
@@ -522,6 +522,7 @@ function getMarvelHero(heroName){
         method: "GET"
 
     }).then(function (response) {
+        // const {id, name, description, thumbnail, path}=response.data.results[0];
         console.log(response);
         console.log("Typecheck: " + typeof response);
         console.log("Testing Spiderman URL: " + response.data.results[0]);
@@ -541,8 +542,12 @@ function getMarvelHero(heroName){
             image: response.data.results[0].thumbnail + "." + response.data.results[0].thumbnail.path
         };
 
-        return(heroResult);
+
+
+        
     });
+
+    return(heroResult);
 }
 
 function send() {
@@ -557,15 +562,75 @@ function send() {
     // getMarvelHero("IronMan");
 }
 
+// thorHero= {
+//     id: ssfdsafslajf,
+//     namd: kljflks
+// }
+
+// function fillHeroes(){
+//     thorHero.id = 1;
+// }
 
 function makeHeroObject(heroName){
-    var marvelInfo = getMarvelHero(heroName);
-    var gifInfo = grabGifs(heroName);
+    // var marvelInfo = getMarvelHero(heroName);
+    // var gifInfo = grabGifs(heroName);
 
-    // constructor(id, name, bio, thumb, image, moving, stopped)
-    var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
+    // // constructor(id, name, bio, thumb, image, moving, stopped)
+    // // var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
+    // var newHero = new Hero(1, 1, 1, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
 
-    return(newHero);
+    // return(newHero);
+
+    var newHero;
+
+    var heroUrl = "https://gateway.marvel.com:443/v1/public/characters?name=" + heroName + "&apikey=" + marvelPublicCode;
+
+    var heroResult;
+
+    $.ajax({
+        url: heroUrl,
+        method: "GET"
+
+    }).then(function (response) {
+        // const {id, name, description, thumbnail, path}=response.data.results[0];
+        console.log(response);
+        console.log("Typecheck: " + typeof response);
+        console.log("Testing Spiderman URL: " + response.data.results[0]);
+        
+        console.log(heroName + " ID: " + response.data.results[0].id);
+        console.log(heroName + " Name: " + response.data.results[0].name);
+        console.log(heroName + " Description: " + response.data.results[0].description);
+        console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail);
+        console.log(heroName + " Image: " + response.data.results[0].thumbnail.path);
+
+        var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + heroName + "&api_key=xmoCxA5GrmbWp0DeDscuQgiMn1KQt4FW";
+        var gifResult;
+    
+        $.ajax({
+            url: giphyURL,
+            method: "GET"
+        }).done(function(responseG){
+            console.log(responseG.data[0].images.original_still.url);
+            console.log(responseG.data[0].images.original.url);
+    
+            heroResult = {
+                id: response.data.results[0].id,
+                name: response.data.results[0].name,
+                bio: response.data.results[0].description,
+                image: response.data.results[0].thumbnail + "." + response.data.results[0].thumbnail.path,
+                moving: responseG.data[0].images.original.url,
+                stopped: responseG.data[0].images.original_still.url
+            };
+            // gifResult = {
+            //     moving: response.data[0].images.original.url,
+            //     stopped: response.data[0].images.original_still.url
+            // };
+    
+            gameHeroes.push(heroResult);
+            console.log(heroResult);
+        });
+
+    });
 }
 
 
@@ -578,7 +643,7 @@ function grabGifs(heroName){
     $.ajax({
         url: giphyURL,
         method: "GET"
-    }).then(function(response){
+    }).done(function(response){
         console.log(response.data[0].images.original_still.url);
         console.log(response.data[0].images.original.url);
 
@@ -587,7 +652,7 @@ function grabGifs(heroName){
             stopped: response.data[0].images.original_still.url
         };
 
-        return(gifResult);
+        gameHeroes.push
     });
 }
 
