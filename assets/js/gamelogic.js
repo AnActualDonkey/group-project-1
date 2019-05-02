@@ -42,6 +42,7 @@ var gameConnections = [];
 var gamePlayers;
 var gameTopClicks = 0;
 var gameTopClicker = "nobody";
+var gameCharacters = ["Spider-Man", "Thor", "Hulk", "Wolverine", "Ultron", "Thanos"];
 
 var teamHealth1;
 var teamHero1;
@@ -49,7 +50,8 @@ var teamHero1;
 var teamHealth2;
 var teamHero2;
 
-
+//  constructor(id, name, bio, thumb, image, moving, stopped)
+var heroTest = new Hero(1, "Thor", "He is a thunder and lightning guy", "thumb", "image", "moving", "stopped");
 
 //Firebae variables
 var database;
@@ -286,6 +288,23 @@ function updatePanels(){
     $("#health-bar-2").attr("style", "width: " + (teamHealth2/initialHealth)*100 + "%");
 }
 
+function createHeroBox(hero, team){
+    var card = $("<div>").addClass("card");
+    
+    var cardHead = $("<div>").addClass("card-header hero-header");
+    // var cardHead = $("<div>").addClass("hero-header");
+
+    var cardBody = $("<div>").addClass("card-body hero-body");
+    // var cardBody = $("<div>").addClass("hero-body");
+
+    cardHead.text(hero.name);
+    cardBody.text(hero.bio);
+
+    card.append(cardHead);
+    card.append(cardBody);
+    $(".hero-box-" + team).append(card);
+}
+
 function checkGame() {
     console.log("Health 1:" + teamHealth1);
     console.log("Health 2:" + teamHealth2);
@@ -320,7 +339,7 @@ function setName(name) {
         playerName = name;
         console.log("Name set: " + name);
         //set user name
-        //push connection/user info to server
+        //push connection/user i nfo to server
         // database.ref("/connections/" + playerKey.key).set({
         //     team: teamSet,
         //     name: playerName,
@@ -354,15 +373,15 @@ function attackButton() {
 function startButton() {
 
 }
-
+ 
 function send() {//URL for Marvel
     // https://gateway.marvel.com:443/v1/public/characters?apikey=
-
-    var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
-
+ 
+var queryUrl = "https://gateway.marvel.com:443/v1/public/characters?apikey=" + marvelPublicCode;
+  
     $.ajax({
         url: queryUrl,
-        method: "GET"
+        method: "GET" 
 
     }).then(function (response) {
         console.log(response);
@@ -372,18 +391,18 @@ function send() {//URL for Marvel
 
 function attackTeam1() {
     teamHealth1--;
-}
+}    
 
 
 function attackTeam2() {
-    teamHealth2--;
-}
+teamHealth2--;
+}    
 
-function prepFight() {
+function prepFight() { 
     updateGameDb(initialHealth, initialHealth, teamHero1, teamHero2, gameHost, gameState);
 }
-
-$("#btn-team-1").on("click", function () {
+     
+        $("#btn-team-1").on("click", function () {
     if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 1)) {
         attackTeam1();
         playerClicks++;
@@ -434,6 +453,11 @@ $("#submit-username").on("click", function (event) {
 $("#submit-chat").on("click", function(event){
     event.preventDefault();
     var text = $("#chat-input").val().trim();
+    
+    if(text === "hero check 1"){
+        createHeroBox(heroTest, playerTeam);
+    }
+    
 
     chatRef.set({
         chat: text,
@@ -447,7 +471,10 @@ $(document).ready(function () {
 
 $("#check-button").on("click", function () {
     checkGame();
-    send();
+    // grabGifs(gameCharacters[0]);
+    for(var i = 0; i < gameCharacters.length; i++){
+        console.log(makeHeroObject(gameCharacters[i]));
+    }
 });
 
 $("#reset-button").on("click", function () {
@@ -464,6 +491,9 @@ $("#start-button").on("click", function () {
         //start timer for fight phase
         console.log("Preparing to fight...");
         controlRef.set({message: "Perparing to fight..."});
+
+        // //choose heroes here
+        // var heroIndex1 = 
 
         prepFight();
         setTimeout(function () {
@@ -485,6 +515,8 @@ $("#start-button").on("click", function () {
 function getMarvelHero(heroName){
     var heroUrl = "https://gateway.marvel.com:443/v1/public/characters?name=" + heroName + "&apikey=" + marvelPublicCode;
 
+    var heroResult;
+
     $.ajax({
         url: heroUrl,
         method: "GET"
@@ -493,14 +525,23 @@ function getMarvelHero(heroName){
         console.log(response);
         console.log("Typecheck: " + typeof response);
         console.log("Testing Spiderman URL: " + response.data.results[0]);
-        for (key in response.data.results) {
-            console.log(key);
-        }
+        // for (key in response.data.results) {
+        //     console.log(key);
+        // }
         console.log(heroName + " ID: " + response.data.results[0].id);
         console.log(heroName + " Name: " + response.data.results[0].name);
         console.log(heroName + " Description: " + response.data.results[0].description);
         console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail);
         console.log(heroName + " Image: " + response.data.results[0].thumbnail.path);
+
+        heroResult = {
+            id: response.data.results[0].id,
+            name: response.data.results[0].name,
+            bio: response.data.results[0].description,
+            image: response.data.results[0].thumbnail + "." + response.data.results[0].thumbnail.path
+        };
+
+        return(heroResult);
     });
 }
 
@@ -515,3 +556,39 @@ function send() {
     // getMarvelHero("CaptainAmerica");
     // getMarvelHero("IronMan");
 }
+
+
+function makeHeroObject(heroName){
+    var marvelInfo = getMarvelHero(heroName);
+    var gifInfo = grabGifs(heroName);
+
+    // constructor(id, name, bio, thumb, image, moving, stopped)
+    var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
+
+    return(newHero);
+}
+
+
+function grabGifs(heroName){
+
+    var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + heroName + "&api_key=xmoCxA5GrmbWp0DeDscuQgiMn1KQt4FW";
+
+    var gifResult;
+
+    $.ajax({
+        url: giphyURL,
+        method: "GET"
+    }).then(function(response){
+        console.log(response.data[0].images.original_still.url);
+        console.log(response.data[0].images.original.url);
+
+        gifResult = {
+            moving: response.data[0].images.original.url,
+            stopped: response.data[0].images.original_still.url
+        };
+
+        return(gifResult);
+    });
+}
+
+
