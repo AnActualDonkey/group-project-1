@@ -49,7 +49,8 @@ var teamHero1;
 var teamHealth2;
 var teamHero2;
 
-
+//  constructor(id, name, bio, thumb, image, moving, stopped)
+var heroTest = new Hero(1, "Thor", "He is a thunder and lightning guy", "thumb", "image", "moving", "stopped");
 
 //Firebae variables
 var database;
@@ -286,6 +287,23 @@ function updatePanels(){
     $("#health-bar-2").attr("style", "width: " + (teamHealth2/initialHealth)*100 + "%");
 }
 
+function createHeroBox(hero, team){
+    var card = $("<div>").addClass("card");
+    
+    var cardHead = $("<div>").addClass("card-header hero-header");
+    // var cardHead = $("<div>").addClass("hero-header");
+
+    var cardBody = $("<div>").addClass("card-body hero-body");
+    // var cardBody = $("<div>").addClass("hero-body");
+
+    cardHead.text(hero.name);
+    cardBody.text(hero.bio);
+
+    card.append(cardHead);
+    card.append(cardBody);
+    $(".hero-box-" + team).append(card);
+}
+
 function checkGame() {
     console.log("Health 1:" + teamHealth1);
     console.log("Health 2:" + teamHealth2);
@@ -434,6 +452,11 @@ $("#submit-username").on("click", function (event) {
 $("#submit-chat").on("click", function(event){
     event.preventDefault();
     var text = $("#chat-input").val().trim();
+    
+    if(text === "hero check 1"){
+        createHeroBox(heroTest, playerTeam);
+    }
+    
 
     chatRef.set({
         chat: text,
@@ -464,6 +487,9 @@ $("#start-button").on("click", function () {
         //start timer for fight phase
         console.log("Preparing to fight...");
         controlRef.set({message: "Perparing to fight..."});
+
+        // //choose heroes here
+        // var heroIndex1 = 
 
         prepFight();
         setTimeout(function () {
@@ -515,3 +541,10 @@ function send() {
     // getMarvelHero("CaptainAmerica");
     // getMarvelHero("IronMan");
 }
+
+// function makeHeroObject(heroName){
+//     var marvelInfo = getMarvelHero(heroName);
+//     var gifInfo = grabGifs(heroName);
+
+//     var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, marvelInfo.thumb. gifInfo.moving);
+// }
