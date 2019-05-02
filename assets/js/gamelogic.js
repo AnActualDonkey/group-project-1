@@ -476,10 +476,18 @@ $("#check-button").on("click", function () {
         makeHeroObject(gameCharacters[i]);
     }
 
+    // for(var j = 0; j < gameHeroes.length; j++){
+    //     console.log(gameHeroes[j].name);
+    // }
+});
+
+$("#check-button2").on("click", function () {
+
     for(var j = 0; j < gameHeroes.length; j++){
-        console.log(gameHeroes[i].name);
+        console.log(gameHeroes[j].name);
     }
 });
+
 
 $("#reset-button").on("click", function () {
     resetGame();
