@@ -475,6 +475,10 @@ $("#check-button").on("click", function () {
     for(var i = 0; i < gameCharacters.length; i++){
         makeHeroObject(gameCharacters[i]);
     }
+
+    for(var j = 0; j < gameCharacters.length; j++){
+        makeHeroObject(gameHeroes[i].name);
+    }
 });
 
 $("#reset-button").on("click", function () {
