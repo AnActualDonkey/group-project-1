@@ -476,8 +476,8 @@ $("#check-button").on("click", function () {
         makeHeroObject(gameCharacters[i]);
     }
 
-    for(var j = 0; j < gameCharacters.length; j++){
-        makeHeroObject(gameHeroes[i].name);
+    for(var j = 0; j < gameHeroes.length; j++){
+        console.log(gameHeroes[i].name);
     }
 });
 
