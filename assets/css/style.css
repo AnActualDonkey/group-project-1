@@ -188,6 +188,7 @@ padding: 20px;
 text-transform: uppercase;
 border-radius: 6px;
 display: inline-block;
+
 }
 .resetButton:hover {
 color: #404040 !important;
@@ -202,6 +203,8 @@ transition: all 0.3s ease 0s;
 #centered_buttons, form { 
   display: flex; 
   justify-content: center; 
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 #control-box {
@@ -244,7 +247,7 @@ form {
   }
 
   input[type=text] {
-    border-color: blue;
+    border-color: silver;
     box-shadow: 0 0 8px 0 blue;
     margin-right: 20px;
     margin-left: 20px;
@@ -256,4 +259,26 @@ form {
     text-shadow: 2px 2px #FF0000;
 
   }
+
+
+  #submit-username, #submit-chat {
+  padding: 10px 20px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: silver;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+#submit-username:hover {background-color: #3e8e41}
+
+#submit-username:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
