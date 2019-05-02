@@ -24,7 +24,7 @@ class Pair {
 
 //these variables are for the game logic
 
-var playerName;
+var playerName = "default-name";
 var playerKey;
 var playerClicks = 0;
 
@@ -40,6 +40,8 @@ var gameHeroName;
 var gameHeroes = [];
 var gameConnections = [];
 var gamePlayers;
+var gameTopClicks = 0;
+var gameTopClicker = "nobody";
 
 var teamHealth1;
 var teamHero1;
@@ -74,7 +76,30 @@ gameRef = database.ref("/game");
 connectionsRef = database.ref("connections");
 controlRef = database.ref("control");
 connectedRef = database.ref(".info/connected");
+clicksRef = database.ref("/clicks");
+topRef = database.ref("/top");
+chatRef = database.ref("/chat");
 
+topRef.on("value", function(snapshot){
+    gameTopClicks = snapshot.val().clicks;
+    gameTopClicker = snapshot.val().name;
+    console.log(gameTopClicks + " from " + gameTopClicker + "!");
+});
+
+clicksRef.orderByChild("/clicks").limitToLast(1).on("child_added", function(snapshot) {
+    // console.log("Highest clicks: " + snapshot.val().clicks);
+    var newClicks = snapshot.val().clicks;
+    var newName = snapshot.val().name;
+    if(newClicks > 0){
+        topRef.set({
+            clicks: snapshot.val().clicks,
+            name: snapshot.val().name
+        });
+    }
+    
+    // gameTopClicks = snapshot.val().clicks;
+    // gameTopClicker = snapshot.val().name;
+});
 
 connectedRef.on("value", function (snapshot) {
     // If they are connected..
@@ -105,11 +130,14 @@ connectedRef.on("value", function (snapshot) {
 connectionsRef.on("value", function (snapshot) {
     gamePlayers = snapshot.numChildren();
 
+    if((snapshot.numChildren()) === 1 && (gameState === "initial") && (gameHost === defaultHost)){
+        console.log("Game is being reset!");
+        resetGame();
+    }
+
     if ((gameState === "initial")) {
         var teamCount = 0;
         var childKeys = [];
-
-
 
         console.log(snapshot.child);
         snapshot.forEach(function (child) {
@@ -126,14 +154,27 @@ connectionsRef.on("value", function (snapshot) {
         });
 
         if (!(childKeys.includes(gameHost)) && (gameHost !== defaultHost)) {
+            console.log("Game reassigning host!");
             updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, childKeys[0], gameState);
         }
+        updatePanels();
     }
 });
 
 controlRef.on("value", function (snapshot){
     $("#control-message").text(snapshot.val().message);
 });
+
+chatRef.on("value", function(snapshot){
+
+    //Keep track of players in the game
+    latestChat = snapshot.val().chat;
+    latestSender = snapshot.val().sender;
+    pushChat(latestSender, latestChat);
+    console.log(snapshot.numChildren());
+}), function(errorObject){
+    console.log(errorObject.code);
+};
 
 //game ref
 //update hostId here upon game value changes
@@ -159,29 +200,85 @@ gameRef.on("value", function (snapshot) {
 
     if(gameState === "initial"){
         playerClicks = 0;
+        // $("#control-message").text("Waiting for host to start game...");
+        // controlRef.set({message: "Waiting for host to start game..."});
     }
 
     if (gameState === "fight") {
-        if ((teamHealth1 <= 0) || (teamHealth2 <= 0)) {
+        if (teamHealth1 < 0) {
             gameState = "initial";
-            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
-            prepFight();
+            updateGameDb(0, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+            // prepFight();
+
+            database.ref("/clicks").set(true);
             //Need to set game back to initial state
             //Soft reset function
+
+            if(playerKey.key === gameHost){
+                chatRef.set({
+                    chat: "Team 2 wins!",
+                    sender: "System"
+                });
+                chatRef.set({
+                    chat: gameTopClicker + " had the most clicks with " + gameTopClicks + "!",
+                    sender: "System"
+                });
+            }
+            controlRef.set({message: "Waiting for host to start game..."});
+        }
+        if (teamHealth2 < 0) {
+            gameState = "initial";
+            updateGameDb(teamHealth1, 0, teamHero1, teamHero2, gameHost, gameState);
+            // prepFight();
+
+
+            database.ref("/clicks").set(true);
+            //Need to set game back to initial state
+            //Soft reset function
+            if(playerKey.key === gameHost){
+                chatRef.set({
+                    chat: "Team 1 wins!",
+                    sender: "System"
+                });
+                chatRef.set({
+                    chat: gameTopClicker + " had the most clicks with " + gameTopClicks + "!",
+                    sender: "System"
+                });
+            }
+            controlRef.set({message: "Waiting for host to start game..."});
+            
         }
     }
 
-    $(".values-1").text("Health: " + teamHealth1 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
-    $(".values-2").text("Health: " + teamHealth2 + " | Clicks: " + playerClicks + " | Username: " + playerName + " | Team: " + playerTeam);
+    $(".values-1").text("Health: " + teamHealth1);
+    $(".values-2").text("Health: " + teamHealth2);
 
     updatePanels();
 
     
-})
+});
+
+function pushChat(sender, message){
+    var newP = $("<p>");
+    newP.text(sender + ": " + message);
+    $("#chat-box").append(newP);
+
+    $("#chat-input").val("");
+
+    console.log($("#chat-box")[0].scrollTop);
+    $("#chat-box")[0].scrollTop = $("#chat-box")[0].scrollHeight;
+}
 
 function updatePanels(){
     $("#control-team").text("Team: " + playerTeam);
-    $("#control-name").text("Name: " + playerName);
+
+    if(playerKey.key === gameHost){
+        $("#control-name").text("Name: " + playerName + " (host)");
+    } else {
+        $("#control-name").text("Name: " + playerName);
+    }
+    
+
     $("#control-clicks").text("Clicks: " + playerClicks);
     $("#control-players").text("Players: " + gamePlayers);
 
@@ -214,7 +311,7 @@ function resetGame() {
     gameClicks = 0;
 
     updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
-    controlRef.set({message: "Enter your name"});
+    controlRef.set({message: "Waiting for host to start game..."});
 }
 
 
@@ -224,6 +321,11 @@ function setName(name) {
         console.log("Name set: " + name);
         //set user name
         //push connection/user info to server
+        // database.ref("/connections/" + playerKey.key).set({
+        //     team: teamSet,
+        //     name: playerName,
+        //     clicks: playerClicks
+        // });
     }
 }
 
@@ -282,21 +384,31 @@ function prepFight() {
 }
 
 $("#btn-team-1").on("click", function () {
-    if ((gameState === "fight") && (teamHealth1 > 0) && (playerTeam === 1)) {
+    if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 1)) {
         attackTeam1();
         playerClicks++;
         console.log("Attacked Team 1 (Health: " + teamHealth1 + ")");
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+        database.ref("/clicks").push({
+            name: playerName,
+            clicks: playerClicks,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
     }
 
 });
 
 $("#btn-team-2").on("click", function () {
-    if ((gameState === "fight") && (teamHealth2 > 0) && (playerTeam === 2)) {
+    if ((gameState === "fight") && (teamHealth2 >= 0) && (playerTeam === 2)) {
         attackTeam2();
         playerClicks++;
         console.log("Attacked Team 2 (Health: " + teamHealth2 + ")");
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+        database.ref("/clicks").push({
+            name: playerName,
+            clicks: playerClicks,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
     }
 
 
@@ -315,8 +427,19 @@ $("#submit-username").on("click", function (event) {
 
         // gameState = "fight";
         updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+        updatePanels();
     }
-})
+});
+
+$("#submit-chat").on("click", function(event){
+    event.preventDefault();
+    var text = $("#chat-input").val().trim();
+
+    chatRef.set({
+        chat: text,
+        sender: playerName
+    });
+});
 
 $(document).ready(function () {
     // resetGame();
@@ -346,7 +469,8 @@ $("#start-button").on("click", function () {
         setTimeout(function () {
             controlRef.set({message: "FIGHT!!!"});
             gameState = "fight";
-            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);}, 3000);
+            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+        }, 3000);
         
     }
 });
