@@ -2,16 +2,37 @@
   box-sizing: border-box;
 }
 
-.title {
-	font-family: Piedra;
-	font-size: 5em;
-	text-align: center;
-  text-shadow: 2px 2px #FF0000;
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 
 }
 
+.title {
+	font-family: Piedra;
+	font-size: 8em;
+	text-align: center;
+  color: blue;
+  /*text-shadow: 2px 2px #FF0000;*/
+  text-shadow: 4px 3px 0px #fff, 9px 8px 0px red;
+  margin-bottom: 30px;
+
+  
+}
+
+.subtitle,
+.p-1,
+.p-2,
+.score-1,
+.score-2 {
+  color: blue;
+  border:red;
+}
+
 .jumbotron {
-  border:5px solid #000;
+  border:5px solid red;
+  border-radius: 20px;
 
 }
 
@@ -40,7 +61,6 @@ h3 {
 
 }
 
-header,
 .player-1,
 .player-2 {
   display: block;
@@ -60,7 +80,7 @@ header,
   height: 400px;
   overflow: hidden;
   padding-bottom: 300px;
-  border:5px solid #000;
+  border:5px solid red;
   border-radius: 20px;
 }
 
@@ -73,7 +93,7 @@ header,
   height: 400px;
   overflow: hidden;
   padding-bottom: 300px;
-  border:5px solid #000;
+  border:5px solid red;
   border-radius: 20px;
 }
 
@@ -90,52 +110,6 @@ header,
   border-radius: 1%;
 }
 
-button { 
-  margin: 20px 20px; 
-  display: inline-block; 
-  width: 20%; 
-  border-radius: 10px; 
-  border: none; 
-  padding: 10px 20px; 
-  /*background-color: #d6a844; */
-}
-
-
-
-
-/*.checkButton {
-color: #494949 !important;
-text-transform: uppercase;
-background: #ffffff;
-padding: 20px;
-border: 4px solid #494949 !important;
-border-radius: 6px;
-display: inline-block;
-}
-
-.checkButton:hover {
-color: #ffffff !important;
-background: #f6b93b;
-border-color: #f6b93b !important;
-transition: all 0.4s ease 0s;
-}
-
-.startButton {
-color: #fff !important;
-text-transform: uppercase;
-background: green;
-padding: 20px;
-border-radius: 50px;
-display: inline-block;
-border: none;
-}
-
-.startButton:hover {
-text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
--webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
--moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
-transition: all 0.4s ease 0s;
-}*/
 
 .startButton {
 border: none;
@@ -215,7 +189,7 @@ font-size: 2em;
 float: none;
 margin-left: 300px;
 margin-right: 300px;
-border: 5px solid #000;
+border: 5px solid red;
 
 }
 
@@ -223,7 +197,7 @@ border: 5px solid #000;
   width: 500px;
   height: 100px;
   overflow: auto;
-  border: solid 5px black;
+  border: solid 5px red;
   background-color: azure;
   border-radius: 10px;
   padding: 5px;
@@ -248,12 +222,13 @@ form {
 
   input[type=text] {
     border-color: silver;
-    box-shadow: 0 0 8px 0 blue;
+    box-shadow: 0 0 8px 0 red;
     margin-right: 20px;
     margin-left: 20px;
   }
 
   label {
+    color: #fff;
     font-size: 2em;
     font-family: Piedra;
     text-shadow: 2px 2px #FF0000;
@@ -261,24 +236,26 @@ form {
   }
 
 
-  #submit-username, #submit-chat {
+  #submit-username, #submit-chat, #btn-team-1, #btn-team-2 {
   padding: 10px 20px;
   font-size: 24px;
   text-align: center;
   cursor: pointer;
   outline: none;
   color: #fff;
-  background-color: silver;
-  border: none;
+  background-color: red;
+  border: 1px solid blue;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 0 9px blue;
+  font-weight: bold;
 }
 
-#submit-username:hover {background-color: #3e8e41}
+#submit-username:hover {
+  background-color: #3e8e41
+}
 
 #submit-username:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
