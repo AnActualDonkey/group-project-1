@@ -471,7 +471,10 @@ $(document).ready(function () {
 
 $("#check-button").on("click", function () {
     checkGame();
-    grabGifs(gameCharacters[0]);
+    // grabGifs(gameCharacters[0]);
+    for(var i = 0; i < gameCharacters.length; i++){
+        console.log(makeHeroObject(gameCharacters[i]));
+    }
 });
 
 $("#reset-button").on("click", function () {
@@ -512,6 +515,8 @@ $("#start-button").on("click", function () {
 function getMarvelHero(heroName){
     var heroUrl = "https://gateway.marvel.com:443/v1/public/characters?name=" + heroName + "&apikey=" + marvelPublicCode;
 
+    var heroResult;
+
     $.ajax({
         url: heroUrl,
         method: "GET"
@@ -520,14 +525,23 @@ function getMarvelHero(heroName){
         console.log(response);
         console.log("Typecheck: " + typeof response);
         console.log("Testing Spiderman URL: " + response.data.results[0]);
-        for (key in response.data.results) {
-            console.log(key);
-        }
+        // for (key in response.data.results) {
+        //     console.log(key);
+        // }
         console.log(heroName + " ID: " + response.data.results[0].id);
         console.log(heroName + " Name: " + response.data.results[0].name);
         console.log(heroName + " Description: " + response.data.results[0].description);
         console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail);
         console.log(heroName + " Image: " + response.data.results[0].thumbnail.path);
+
+        heroResult = {
+            id: response.data.results[0].id,
+            name: response.data.results[0].name,
+            bio: response.data.results[0].description,
+            image: response.data.results[0].thumbnail + "." + response.data.results[0].thumbnail.path
+        };
+
+        return(heroResult);
     });
 }
 
@@ -544,17 +558,22 @@ function send() {
 }
 
 
-// function makeHeroObject(heroName){
-//     var marvelInfo = getMarvelHero(heroName);
-//     var gifInfo = grabGifs(heroName);
+function makeHeroObject(heroName){
+    var marvelInfo = getMarvelHero(heroName);
+    var gifInfo = grabGifs(heroName);
 
-//     var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, marvelInfo.thumb. gifInfo.moving);
-// }
+    // constructor(id, name, bio, thumb, image, moving, stopped)
+    var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
+
+    return(newHero);
+}
 
 
 function grabGifs(heroName){
 
     var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + heroName + "&api_key=xmoCxA5GrmbWp0DeDscuQgiMn1KQt4FW";
+
+    var gifResult;
 
     $.ajax({
         url: giphyURL,
@@ -562,7 +581,14 @@ function grabGifs(heroName){
     }).then(function(response){
         console.log(response.data[0].images.original_still.url);
         console.log(response.data[0].images.original.url);
-    })
+
+        gifResult = {
+            moving: response.data[0].images.original.url,
+            stopped: response.data[0].images.original_still.url
+        };
+
+        return(gifResult);
+    });
 }
 
 
