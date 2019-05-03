@@ -22,6 +22,8 @@ class Pair {
     }
 }
 
+
+
 //these variables are for the game logic
 
 var playerName = "default-name";
@@ -43,6 +45,24 @@ var gamePlayers;
 var gameTopClicks = 0;
 var gameTopClicker = "nobody";
 var gameCharacters = ["Spider-Man", "Thor", "Hulk", "Wolverine", "Ultron", "Thanos"];
+
+//Initialize heroes
+for(var i = 0; i < gameCharacters.length; i++){
+    makeHeroObject(gameCharacters[i]);
+}
+
+//Checking number of heroes at this point
+console.log(gameHeroes.length);
+
+gameHeroes.sort(function compare(a, b) {
+    if ( a.id < b.id ){
+        return -1;
+    }
+    if ( a.id > b.id ){
+        return 1;
+    }
+    return 0;
+});
 
 var teamHealth1;
 var teamHero1;
@@ -188,6 +208,10 @@ gameRef.on("value", function (snapshot) {
     gameHost = snapshot.val().host;
     teamHero1 = snapshot.val().hero1;
     teamHero2 = snapshot.val().hero2;
+
+    createHeroBox(teamHero1, 1);
+    createHeroBox(teamHero2, 2);
+
     teamHealth1 = snapshot.val().health1;
     teamHealth2 = snapshot.val().health2;
 
@@ -265,7 +289,7 @@ function pushChat(sender, message){
     newP.text(sender + ": " + message);
     $("#chat-box").append(newP);
 
-    $("#chat-input").val("");
+    
 
     console.log($("#chat-box")[0].scrollTop);
     $("#chat-box")[0].scrollTop = $("#chat-box")[0].scrollHeight;
@@ -292,6 +316,8 @@ function createHeroBox(hero, team){
     var card = $("<div>").addClass("card");
     
     var cardHead = $("<div>").addClass("card-header hero-header");
+    //WORKS
+    cardHead.css("background-image", "url(https://developerpodcasts.com/wp-content/uploads/2016/08/testandcode_480.png)");
     // var cardHead = $("<div>").addClass("hero-header");
 
     var cardBody = $("<div>").addClass("card-body hero-body");
@@ -299,9 +325,11 @@ function createHeroBox(hero, team){
 
     cardHead.text(hero.name);
     cardBody.text(hero.bio);
-
+    
+    var cardBody2 = $("<div>").addClass("card-body hero-body");
     card.append(cardHead);
     card.append(cardBody);
+    card.append(cardBody2);
     $(".hero-box-" + team).append(card);
 }
 
@@ -463,6 +491,7 @@ $("#submit-chat").on("click", function(event){
         chat: text,
         sender: playerName
     });
+    $("#chat-input").val("");
 });
 
 $(document).ready(function () {
@@ -505,13 +534,18 @@ $("#start-button").on("click", function () {
         controlRef.set({message: "Perparing to fight..."});
 
         // //choose heroes here
-        // var heroIndex1 = 
+        var heroIndex1 = Math.floor(Math.random() * gameHeroes.length);
+        var heroIndex2 = heroIndex1;
+
+        while(heroIndex2 === heroIndex1){
+            heroIndex2 = Math.floor(Math.random() * gameHeroes.length);
+        }
 
         prepFight();
         setTimeout(function () {
             controlRef.set({message: "FIGHT!!!"});
             gameState = "fight";
-            updateGameDb(teamHealth1, teamHealth2, teamHero1, teamHero2, gameHost, gameState);
+            updateGameDb(teamHealth1, teamHealth2, heroIndex1, heroIndex2, gameHost, gameState);
         }, 3000);
         
     }
