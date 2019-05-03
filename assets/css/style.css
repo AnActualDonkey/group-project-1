@@ -158,6 +158,10 @@ background: none;
 transition: all 0.3s ease 0s;
 }
 
+.hero-header{
+  height: 400px;
+}
+
 .checkButton {
 border: none;
 background: #D4AF37;
