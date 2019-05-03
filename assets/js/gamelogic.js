@@ -65,10 +65,10 @@ gameHeroes.sort(function compare(a, b) {
 });
 
 var teamHealth1;
-var teamHero1;
+var teamHero1 = 0;
 
 var teamHealth2;
-var teamHero2;
+var teamHero2 = 1;
 
 //  constructor(id, name, bio, thumb, image, moving, stopped)
 var heroTest = new Hero(1, "Thor", "He is a thunder and lightning guy", "thumb", "image", "moving", "stopped");
@@ -316,17 +316,19 @@ function createHeroBox(hero, team){
     var card = $("<div>").addClass("card");
     
     var cardHead = $("<div>").addClass("card-header hero-header");
+    cardHead.text(hero.name);
+    
     //WORKS
-    cardHead.css("background-image", "url(https://developerpodcasts.com/wp-content/uploads/2016/08/testandcode_480.png)");
-    // var cardHead = $("<div>").addClass("hero-header");
+    // cardHead.css("background-image", "url(https://developerpodcasts.com/wp-content/uploads/2016/08/testandcode_480.png)");
+    
 
     var cardBody = $("<div>").addClass("card-body hero-body");
-    // var cardBody = $("<div>").addClass("hero-body");
-
-    cardHead.text(hero.name);
     cardBody.text(hero.bio);
-    
+
     var cardBody2 = $("<div>").addClass("card-body hero-body");
+    cardBody2.append($("<img src='" + hero.moving + "'>"));
+    
+    
     card.append(cardHead);
     card.append(cardBody);
     card.append(cardBody2);
@@ -346,10 +348,10 @@ function resetGame() {
     playerClicks = 0;
 
     teamHealth1 = initialHealth;
-    teamHero1 = "";
+    teamHero1 = 0;
 
     teamHealth2 = initialHealth;
-    teamHero2 = "";
+    teamHero2 = 1;
 
     gameHost = defaultHost;
 
@@ -483,7 +485,7 @@ $("#submit-chat").on("click", function(event){
     var text = $("#chat-input").val().trim();
     
     if(text === "hero check 1"){
-        createHeroBox(heroTest, playerTeam);
+        createHeroBox(gameHeroes[1], playerTeam);
     }
     
 
