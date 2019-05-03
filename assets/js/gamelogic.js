@@ -313,6 +313,8 @@ function updatePanels(){
 }
 
 function createHeroBox(hero, team){
+
+    $(".hero-box-" + team).empty();
     var card = $("<div>").addClass("card");
     
     var cardHead = $("<div>").addClass("card-header hero-header");
