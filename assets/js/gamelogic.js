@@ -427,14 +427,14 @@ function attackTeam1() {
 
 
 function attackTeam2() {
-teamHealth2--;
+    teamHealth2--;
 }    
 
 function prepFight() { 
     updateGameDb(initialHealth, initialHealth, teamHero1, teamHero2, gameHost, gameState);
 }
      
-        $("#btn-team-1").on("click", function () {
+$("#btn-team-1").on("click", function () {
     if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 2)) {
         attackTeam1();
         playerClicks++;
