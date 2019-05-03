@@ -435,7 +435,7 @@ function prepFight() {
 }
      
         $("#btn-team-1").on("click", function () {
-    if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 1)) {
+    if ((gameState === "fight") && (teamHealth1 >= 0) && (playerTeam === 2)) {
         attackTeam1();
         playerClicks++;
         console.log("Attacked Team 1 (Health: " + teamHealth1 + ")");
@@ -450,7 +450,7 @@ function prepFight() {
 });
 
 $("#btn-team-2").on("click", function () {
-    if ((gameState === "fight") && (teamHealth2 >= 0) && (playerTeam === 2)) {
+    if ((gameState === "fight") && (teamHealth2 >= 0) && (playerTeam === 1)) {
         attackTeam2();
         playerClicks++;
         console.log("Attacked Team 2 (Health: " + teamHealth2 + ")");
