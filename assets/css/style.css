@@ -96,12 +96,6 @@ h3 {
   padding-right: 50px;
 }
 
-/*div.player-1,
-div.player-2 {
-  text-shadow: 2px 2px blue;
-
-}*/
-
 
 .score {
 	padding-bottom: 270px;
@@ -122,15 +116,15 @@ button {
   border-radius: 10px; 
   border: none; 
   padding: 10px 20px; 
-  /*background-color: #d6a844; */
 }
 
 
 .startButton {
-border: none;
-background: green;
-color: #ffffff !important;
-font-weight: 100;
+border: 1px solid red;
+background-color: blue;
+font-size: 2em;
+color: #fff !important;
+font-weight: bold;
 padding: 20px;
 text-transform: uppercase;
 border-radius: 6px;
@@ -138,19 +132,16 @@ display: inline-block;
 }
 
 .startButton:hover {
-color: #404040 !important;
+color: #fff !important;
 font-weight: 700 !important;
 letter-spacing: 3px;
-background: none;
+background: green;
 -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
 -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
 transition: all 0.3s ease 0s;
 }
 
-/* .hero-header{
-  height: 100px;
-} */
-.hero-bio{
+.hero-bio {
   font-size: 12px;
   font-family: 'Courier New', Courier, monospace;
   text-shadow: none;
@@ -212,8 +203,10 @@ transition: all 0.3s ease 0s;
   margin-left: 20px;
 }
 
+
 #control-box {
 background-color: #d3d3d3;
+color: blue;
 opacity: 0.9;
 border-radius: 10px;
 text-align: center;
@@ -226,6 +219,7 @@ border: 5px solid red;
 
 #chat-box{
   width: 500px;
+  color: blue;
   height: 100px;
   overflow: auto;
   border: solid 5px red;
@@ -262,13 +256,36 @@ form {
     font-size: 3em;
     color: red;
     font-family: Piedra;
-    /*text-shadow: 2px 2px #FF0000;*/
     text-shadow: 1px 1px 1px #fff, 3px 3px 5px blue;
 
   }
 
+  button.btn.btn-primary {
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  text-shadow: 5px 5px red;
+  background-color: red;
+  border-radius: 20px;
+  box-shadow: 0 9px blue;
+  border: 1px solid #fff;
+}
 
-  #submit-username, #submit-chat {
+.modal-title {
+  color: blue;
+  text-align: center;
+  font-size: 2em;
+}
+
+.modal-body {
+  color: red;
+}
+
+
+  #submit-username,
+  #submit-chat {
   padding: 10px 20px;
   font-size: 24px;
   text-align: center;

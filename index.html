@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Injustice Lite</title>
+	<title>Hero Battle</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Piedra" rel="stylesheet" type="text/css">
@@ -115,15 +115,48 @@
             </form>
 		</div>
 		<div id="admin-panel">
+			<div id="start-button" class="button_cont" align="center"><a class="startButton"><marquee>Start</marquee></a></div>
+
+			</div>
 			<div id="centered_buttons">
 				<!-- <button id="check-button">CHECK</button> -->
-				<div id="check-button" class="button_cont" align="center"><a class="checkButton">CHECK</a></div>
+				<!-- <div id="check-button" class="button_cont" align="center"><a class="checkButton">CHECK</a></div>
 				<div id="check-button2" class="button_cont" align="center"><a class="checkButton">CHECK2</a></div>
-				<!-- <button id="reset-button">Reset</button> -->
-				<div id="reset-button" class="button_cont" align="center"><a class="resetButton">Reset</a></div>
+				<button id="reset-button">Reset</button>
+				<div id="reset-button" class="button_cont" align="center"><a class="resetButton">Reset</a></div> -->
 				<!-- <button id="start-button">Start</button> -->
-				<div id="start-button" class="button_cont" align="center"><a class="startButton">Start</a></div>
+				<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			 Instructions
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">How To Play</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<p>1. Press Start.</p>
+			      	<p>2. Choose a Side.</p>
+			      	<p>3. Click the "ATTACK" button to strike your opponent.</p>
+			      	<p>3. Try to weaken the strength of your opponent.</p>
+			      	<p>3. Weaken the strength of the opponent before your own expires.</p>
+			      	<p>3. The first to eradicate all of the opponents strength wins the round.</p>
+			       
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+			      </div>
+			    </div>
+			  </div>
 			</div>
+				
 
 			<div id="user_name">
 			</div>
