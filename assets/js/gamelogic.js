@@ -276,8 +276,8 @@ gameRef.on("value", function (snapshot) {
         }
     }
 
-    $(".values-1").text("Health: " + teamHealth1);
-    $(".values-2").text("Health: " + teamHealth2);
+    // $(".values-1").text("Health: " + teamHealth1);
+    // $(".values-2").text("Health: " + teamHealth2);
 
     updatePanels();
 
