@@ -162,7 +162,13 @@ transition: all 0.3s ease 0s;
   height: 100px;
 } */
 .hero-bio{
-  font-size: 1em;
+  font-size: 12px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.hero-gif-1,
+.hero-gif-2{
+  max-width: 150px;
 }
 
 
