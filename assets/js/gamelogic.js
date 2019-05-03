@@ -635,7 +635,8 @@ function makeHeroObject(heroName){
 
     $.ajax({
         url: heroUrl,
-        method: "GET"
+        method: "GET",
+        async: false
 
     }).then(function (response) {
         // const {id, name, description, thumbnail, path}=response.data.results[0];
@@ -654,8 +655,9 @@ function makeHeroObject(heroName){
     
         $.ajax({
             url: giphyURL,
-            method: "GET"
-        }).done(function(responseG){
+            method: "GET",
+            async: false
+        }).then(function(responseG){
             console.log(responseG.data[0].images.original_still.url);
             console.log(responseG.data[0].images.original.url);
     
