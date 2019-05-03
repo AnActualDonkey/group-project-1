@@ -209,8 +209,8 @@ gameRef.on("value", function (snapshot) {
     teamHero1 = snapshot.val().hero1;
     teamHero2 = snapshot.val().hero2;
 
-    createHeroBox(teamHero1, 1);
-    createHeroBox(teamHero2, 2);
+    createHeroBox(gameHeroes[teamHero1], 1);
+    createHeroBox(gameHeroes[teamHero2], 2);
 
     teamHealth1 = snapshot.val().health1;
     teamHealth2 = snapshot.val().health2;
