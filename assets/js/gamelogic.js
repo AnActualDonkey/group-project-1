@@ -647,7 +647,7 @@ function makeHeroObject(heroName){
         console.log(heroName + " ID: " + response.data.results[0].id);
         console.log(heroName + " Name: " + response.data.results[0].name);
         console.log(heroName + " Description: " + response.data.results[0].description);
-        console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail);
+        console.log(heroName + " Thumbnail: " + response.data.results[0].thumbnail.path);
         console.log(heroName + " Image: " + response.data.results[0].thumbnail.path);
 
         var giphyURL = "https://api.giphy.com/v1/gifs/search?q=" + heroName + "&api_key=xmoCxA5GrmbWp0DeDscuQgiMn1KQt4FW";
@@ -665,7 +665,7 @@ function makeHeroObject(heroName){
                 id: response.data.results[0].id,
                 name: response.data.results[0].name,
                 bio: response.data.results[0].description,
-                image: response.data.results[0].thumbnail + "." + response.data.results[0].thumbnail.path,
+                image: response.data.results[0].thumbnail.path + "." + response.data.results[0].thumbnail.extension,
                 moving: responseG.data[0].images.original.url,
                 stopped: responseG.data[0].images.original_still.url
             };
