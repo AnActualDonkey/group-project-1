@@ -324,11 +324,11 @@ function createHeroBox(hero, team){
     // cardHead.css("background-image", "url(https://developerpodcasts.com/wp-content/uploads/2016/08/testandcode_480.png)");
     
 
-    var cardBody = $("<div>").addClass("card-body hero-body");
+    var cardBody = $("<div>").addClass("card-body hero-bio");
     cardBody.text(hero.bio);
 
-    var cardBody2 = $("<div>").addClass("card-body hero-body");
-    cardBody2.append($("<img src='" + hero.moving + "'>"));
+    var cardBody2 = $("<div>").addClass("card-body hero-gif");
+    cardBody2.append($("<img class='hero-gif-" + team + "' src='" + hero.moving + "'>"));
     
     
     card.append(cardHead);

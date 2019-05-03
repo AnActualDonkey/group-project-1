@@ -158,9 +158,13 @@ background: none;
 transition: all 0.3s ease 0s;
 }
 
-.hero-header{
+/* .hero-header{
   height: 100px;
+} */
+.hero-bio{
+  font-size: 1em;
 }
+
 
 .checkButton {
 border: none;
