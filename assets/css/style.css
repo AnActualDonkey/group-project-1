@@ -233,8 +233,7 @@ border-radius: 10px;
 text-align: center;
 font-size: 2em;
 float: none;
-margin-left: 300px;
-margin-right: 300px;
+margin: auto;
 border: 5px solid #000;
 
 }
@@ -247,7 +246,7 @@ border: 5px solid #000;
   background-color: azure;
   border-radius: 10px;
   padding: 5px;
-  margin-left: 300px;
+  margin: auto;
 }
 
 form {
