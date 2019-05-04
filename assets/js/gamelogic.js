@@ -78,15 +78,6 @@ var teamHero2 = 1;
 var heroTest = new Hero(1, "Thor", "He is a thunder and lightning guy", "thumb", "image", "moving", "stopped");
 
 function makeHeroObject(heroName){
-    // var marvelInfo = getMarvelHero(heroName);
-    // var gifInfo = grabGifs(heroName);
-
-    // // constructor(id, name, bio, thumb, image, moving, stopped)
-    // // var newHero = new Hero(marvelInfo.id, marvelInfo.name, marvelInfo.bio, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
-    // var newHero = new Hero(1, 1, 1, "blank", marvelInfo.image, gifInfo.moving, gifInfo.stopped);
-
-    // return(newHero);
-
     var newHero;
 
     var heroUrl = "https://gateway.marvel.com:443/v1/public/characters?name=" + heroName + "&apikey=" + marvelPublicCode;
@@ -129,10 +120,6 @@ function makeHeroObject(heroName){
                 moving: responseG.data[0].images.original.url,
                 stopped: responseG.data[0].images.original_still.url
             };
-            // gifResult = {
-            //     moving: response.data[0].images.original.url,
-            //     stopped: response.data[0].images.original_still.url
-            // };
     
             gameHeroes.push(heroResult);
             console.log(heroResult);
@@ -190,8 +177,7 @@ $(document).ready(function () {
             });
         }
         
-        // gameTopClicks = snapshot.val().clicks;
-        // gameTopClicker = snapshot.val().name;
+        
     });
 
     connectedRef.on("value", function (snapshot) {
@@ -201,17 +187,9 @@ $(document).ready(function () {
             // Add user to the connections list.
             playerKey = connectionsRef.push(true);
 
-            // chatRef.set({
-            //     chat: screenName + " has joined the chat!",
-            //     sender: "System"
-            // });
 
             // Remove user from the connection list when they disconnect.
             playerKey.onDisconnect().remove();
-
-            // for (key in playerKey){
-            //     console.log(key);
-            // }
 
             console.log("Connection id: " + playerKey);
             console.log("Type: " + playerKey.key);
@@ -297,8 +275,7 @@ $(document).ready(function () {
 
         if(gameState === "initial"){
             playerClicks = 0;
-            // $("#control-message").text("Waiting for host to start game...");
-            // controlRef.set({message: "Waiting for host to start game..."});
+            
         }
 
         if (gameState === "fight") {
@@ -347,8 +324,6 @@ $(document).ready(function () {
             }
         }
 
-        // $(".values-1").text("Health: " + teamHealth1);
-        // $(".values-2").text("Health: " + teamHealth2);
 
         updatePanels();
 
@@ -390,9 +365,6 @@ $(document).ready(function () {
         
         var cardHead = $("<div>").addClass("card-header hero-header");
         cardHead.text(hero.name);
-        
-        //WORKS
-        // cardHead.css("background-image", "url(https://developerpodcasts.com/wp-content/uploads/2016/08/testandcode_480.png)");
         
 
         var cardBody = $("<div>").addClass("card-body hero-bio");
@@ -441,13 +413,7 @@ $(document).ready(function () {
         if (gameState === "initial") {
             playerName = name;
             console.log("Name set: " + name);
-            //set user name
-            //push connection/user i nfo to server
-            // database.ref("/connections/" + playerKey.key).set({
-            //     team: teamSet,
-            //     name: playerName,
-            //     clicks: playerClicks
-            // });
+            
         }
     }
 
@@ -577,10 +543,6 @@ $(document).ready(function () {
         for(var i = 0; i < gameCharacters.length; i++){
             makeHeroObject(gameCharacters[i]);
         }
-
-        // for(var j = 0; j < gameHeroes.length; j++){
-        //     console.log(gameHeroes[j].name);
-        // }
     });
 
     $("#check-button2").on("click", function () {
@@ -624,10 +586,6 @@ $(document).ready(function () {
         }
     });
 
-
-    //test
-    //Calls API function (check console)
-    //send();
 
     //Testing Marvel Character calls
 
@@ -681,14 +639,6 @@ $(document).ready(function () {
         // getMarvelHero("IronMan");
     }
 
-    // thorHero= {
-    //     id: ssfdsafslajf,
-    //     namd: kljflks
-    // }
-
-    // function fillHeroes(){
-    //     thorHero.id = 1;
-    // }
 
 
 
