@@ -36,7 +36,7 @@ var playerClicks = 0;
 
 var playerTeam;
 
-var initialHealth = 25;
+var initialHealth = 150;
 var defaultHost = "no-host-entered";
 
 var gameState = "initial";
