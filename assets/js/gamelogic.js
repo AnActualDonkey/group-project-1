@@ -22,7 +22,11 @@ class Pair {
     }
 }
 
-
+var cleaveName = new Cleave('#username-input', {
+    prefix: 'The Amazing',
+    delimiter: '-',
+    uppercase: true
+});
 
 //these variables are for the game logic
 
